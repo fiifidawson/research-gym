@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-09-22T14:35:30+00:00",
+  "people": [
+    {
+      "handle": "arnolfokam",
+      "name": "Arnol Fokam",
+      "role": "Research Engineer",
+      "track": "research-ready",
+      "here_for": "I want to be able to train reasoning models and run post-training methods like LoRA, DPO and GRPO end to end.",
+      "links": {
+        "github": "https://github.com/arnolfokam"
+      }
+    }
+  ],
+  "progress": {
+    "arnolfokam": {
+      "00-onboarding": {
+        "core_passed": 5,
+        "core_total": 5,
+        "stretch_passed": 0,
+        "stretch_total": 0,
+        "status": "complete"
+      }
+    }
+  }
+}
