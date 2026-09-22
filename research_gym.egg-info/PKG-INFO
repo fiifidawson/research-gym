@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: research-gym
+Version: 0.1.0
+Summary: A shared gym for getting good at AI research and engineering.
+Requires-Python: >=3.10
+License-File: LICENSE
+Requires-Dist: numpy>=1.26
+Provides-Extra: checks
+Requires-Dist: pytest>=8.0; extra == "checks"
+Requires-Dist: pytest-json-report>=1.5; extra == "checks"
+Provides-Extra: torch
+Requires-Dist: torch>=2.2; extra == "torch"
+Dynamic: license-file

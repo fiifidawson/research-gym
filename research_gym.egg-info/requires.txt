@@ -1,0 +1,8 @@
+numpy>=1.26
+
+[checks]
+pytest>=8.0
+pytest-json-report>=1.5
+
+[torch]
+torch>=2.2
