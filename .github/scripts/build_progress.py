@@ -28,8 +28,8 @@ SUBMISSIONS = REPO_ROOT / "submissions"
 MODULES = REPO_ROOT / "modules"
 
 
-def evaluate(module: str, submission_dir: Path) -> dict:
-    """Run one module's checks against one submission."""
+def evaluate(module: str, submission_dir: Path) -> dict | None:
+    """Run one module's checks against one submission, or None if there is nothing there."""
     blank = {
         "core_passed": 0,
         "core_total": 0,
@@ -45,6 +45,10 @@ def evaluate(module: str, submission_dir: Path) -> dict:
     core = [c for c in suite.checks if c.tier != STRETCH]
     stretch = [c for c in suite.checks if c.tier == STRETCH]
     blank |= {"core_total": len(core), "stretch_total": len(stretch)}
+
+    if not (submission_dir / suite.entrypoint).is_file():
+        # An empty folder is somebody who has not started, not somebody who is broken.
+        return None
 
     try:
         submission = load_submission(submission_dir, suite.entrypoint)
@@ -115,16 +119,18 @@ def main() -> int:
             if not (MODULES / module_dir.name / "checks.py").is_file():
                 continue
             try:
-                rows[module_dir.name] = evaluate(module_dir.name, module_dir)
+                row = evaluate(module_dir.name, module_dir)
             except Exception:  # noqa: BLE001 - one bad submission must not lose the rest
                 traceback.print_exc()
-                rows[module_dir.name] = {
+                row = {
                     "status": "broken",
                     "core_passed": 0,
                     "core_total": 0,
                     "stretch_passed": 0,
                     "stretch_total": 0,
                 }
+            if row is not None:
+                rows[module_dir.name] = row
         if rows:
             progress[handle] = rows
 

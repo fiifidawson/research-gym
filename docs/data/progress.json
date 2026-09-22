@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-22T14:09:51+00:00",
+  "generated_at": "2026-09-22T14:10:31+00:00",
   "people": [
     {
       "handle": "arnolfokam",
@@ -20,15 +20,6 @@
         "stretch_passed": 0,
         "stretch_total": 0,
         "status": "complete"
-      }
-    },
-    "nthabiseng": {
-      "01-oop-refresher": {
-        "core_passed": 0,
-        "core_total": 18,
-        "stretch_passed": 0,
-        "stretch_total": 4,
-        "status": "broken"
       }
     }
   }
