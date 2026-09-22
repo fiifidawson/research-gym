@@ -42,7 +42,10 @@
   </div>
 
   <div class="cols">
-    <div><textarea id="code" spellcheck="false" aria-label="Your code"></textarea></div>
+    <div class="editor">
+      <pre id="code-highlight" aria-hidden="true"><code></code></pre>
+      <textarea id="code" spellcheck="false" aria-label="Your code"></textarea>
+    </div>
     <div id="results-pane"><p class="muted small">Results appear here.</p></div>
   </div>
 </main>
@@ -53,5 +56,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/pyodide@0.26.4/pyodide.js"></script>
 <script src="assets/pyodide-runner.js"></script>
+<script src="assets/highlight.js"></script>
 </body>
 </html>

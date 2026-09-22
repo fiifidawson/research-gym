@@ -10,6 +10,16 @@
   --pass: #1f7a3d;
   --fail: #b3261e;
 
+  --t-comment: #6b7280;
+  --t-string: #166534;
+  --t-number: #9a4f00;
+  --t-keyword: #8b2fa0;
+  --t-constant: #8b2fa0;
+  --t-builtin: #14508c;
+  --t-decorator: #9a4f00;
+  --t-name: #14508c;
+  --t-self: #6b7280;
+
   --max: 760px;
   --gutter: 20px;
 }
@@ -23,6 +33,16 @@
   --link: #79b0e8;
   --pass: #6fbf87;
   --fail: #e8867e;
+
+  --t-comment: #7d8590;
+  --t-string: #9ece6a;
+  --t-number: #ffb86c;
+  --t-keyword: #c792ea;
+  --t-constant: #c792ea;
+  --t-builtin: #79b0e8;
+  --t-decorator: #ffb86c;
+  --t-name: #79b0e8;
+  --t-self: #9a9a9a;
 }
 
 * { box-sizing: border-box; }
@@ -125,18 +145,63 @@ button:disabled { opacity: 0.5; cursor: default; }
 .cols { display: grid; gap: 20px; }
 @media (min-width: 900px) { .cols { grid-template-columns: 1fr 1fr; } }
 
-textarea#code {
+/* The editor is a coloured <pre> sitting behind a textarea whose own glyphs
+   are transparent. They line up only while every property that decides where a
+   glyph lands is identical, so those are set once, for both layers. */
+
+.editor { position: relative; }
+
+.editor > pre,
+.editor > textarea#code {
+  margin: 0;
   width: 100%;
   min-height: 400px;
-  resize: vertical;
   padding: 12px;
   border: 1px solid var(--border);
   border-radius: 4px;
-  background: var(--bg);
-  color: var(--text);
   font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   tab-size: 4;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  scrollbar-gutter: stable;
 }
+
+.editor > pre {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Undo the 0.9em the global `code` rule would apply on top of the 13px. */
+.editor > pre code { font: inherit; background: none; padding: 0; }
+
+.editor > textarea#code {
+  position: relative;
+  display: block;
+  resize: vertical;
+  overflow-y: auto;
+  background: transparent;
+  color: transparent;
+  caret-color: var(--text);
+}
+
+.editor ::selection { background: #7aa7d422; }
+
+/* No italics anywhere in here: a synthesised oblique can carry a different
+   advance width than the roman the textarea draws, and the two layers would
+   drift apart mid-line. Colour alone does the work. */
+.t-comment { color: var(--t-comment); }
+.t-string { color: var(--t-string); }
+.t-number { color: var(--t-number); }
+.t-keyword { color: var(--t-keyword); }
+.t-constant { color: var(--t-constant); }
+.t-builtin { color: var(--t-builtin); }
+.t-decorator { color: var(--t-decorator); }
+.t-name { color: var(--t-name); }
+.t-self { color: var(--t-self); }
 
 .results { list-style: none; padding: 0; margin: 0; }
 .results li { padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.93rem; }

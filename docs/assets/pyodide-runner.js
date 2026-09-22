@@ -94,7 +94,7 @@ async function selectModule(id) {
   }
 
   const saved = localStorage.getItem(`research-gym:${id}`);
-  $("code").value = saved ?? state.starters.get(id);
+  setCode(saved ?? state.starters.get(id));
   $("results-pane").replaceChildren(
     Object.assign(document.createElement("p"), {
       className: "muted small",
@@ -191,6 +191,14 @@ function render(payload) {
   );
 }
 
+// Assigning .value fires no input event, so the highlighter would keep showing
+// the previous file. Everything that replaces the editor contents goes through
+// here and says so.
+function setCode(text) {
+  $("code").value = text;
+  $("code").dispatchEvent(new Event("codechange"));
+}
+
 function save() {
   if (!state.module) return;
   try {
@@ -206,14 +214,14 @@ $("code").addEventListener("input", save);
 
 $("reset").addEventListener("click", () => {
   if (!state.module) return;
-  $("code").value = state.starters.get(state.module.id) ?? "";
+  setCode(state.starters.get(state.module.id) ?? "");
   save();
 });
 
 $("file").addEventListener("change", async (event) => {
   const file = event.target.files?.[0];
   if (!file) return;
-  $("code").value = await file.text();
+  setCode(await file.text());
   save();
   event.target.value = "";
 });
