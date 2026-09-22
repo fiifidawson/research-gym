@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+     stroke="#111" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Black on a light tab strip, white on a dark one. Browsers that ignore
+       the media query keep the black stroke attribute above. -->
+  <style>
+    @media (prefers-color-scheme: dark) { :root { stroke: #fff } }
+  </style>
+  <path d="M12 2 21 7v10l-9 5-9-5V7Z"/>
+  <path d="m3 7 9 5 9-5"/>
+  <path d="M12 12v10"/>
+</svg>
