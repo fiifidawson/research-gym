@@ -13,7 +13,7 @@ Along the way: operator overloading, topological sort, the chain rule, concretel
 
 ## Why it is on the track
 
-Five of us put Beginner next to 'math for ML'. The chain rule stops being a formula the moment you have written the thing that applies it.
+Three of us put Beginner next to 'math for ML'. The chain rule stops being a formula the moment you have written the thing that applies it.
 
 ## Want to help build it?
 

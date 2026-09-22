@@ -22,7 +22,7 @@ include = ["gym*"]
 testpaths = ["modules"]
 # --import-mode=importlib: every module's tests/test_module.py is deliberately the same
 # file, so the default import mode sees a name collision the moment there are two modules.
-addopts = "-q --strict-markers --import-mode=importlib"
+addopts = "--strict-markers --import-mode=importlib"
 markers = ["stretch: optional extension, not required to pass a module"]
 
 [tool.ruff]

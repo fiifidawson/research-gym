@@ -13,7 +13,7 @@ Along the way: nn.Module, tensors and devices, autograd you did not write.
 
 ## Why it is on the track
 
-Three of us are new to PyTorch and one is new to Python. Porting code you already understand is the cheapest way in - you are only learning the API, not the ideas.
+Four of us rated deep learning frameworks Beginner, and at least one of us is coming to Python from another language. Porting code you already understand is the cheapest way in - you are only learning the API, not the ideas.
 
 ## Want to help build it?
 

@@ -14,18 +14,27 @@ nothing in here is the survey**, which stays outside the repo and is ignored by 
 
 ## 2. Replace the placeholders
 
-Four files carry a `REPLACE-ME`:
+Several files carry a `REPLACE-ME`:
 
 | File | Change it to |
 |---|---|
 | `docs/data/curriculum.json` → `repo` | the repo URL |
 | `.github/ISSUE_TEMPLATE/config.yml` | the same, in both links |
 | `.github/CODEOWNERS` | real handles or real teams |
+| `README.md`, `CONTRIBUTING.md`, the `TASK.md`s | the GitHub Pages URL, in links to the site |
+
+Once Pages is on (step 3) and you know the site URL, swap the rest in one go:
+
+```bash
+grep -rl REPLACE-ME --include='*.md' --include='*.json' --include='*.yml' --include='CODEOWNERS' . | xargs sed -i 's|REPLACE-ME|<org-or-you>|g'
+```
+
+Then check nothing is left: `grep -rn REPLACE-ME . | grep -v '\.git/'`
 
 For `CODEOWNERS`, either make two GitHub teams or just list handles:
 
 ```
-submissions/          @fasseu @blessing @keza @arnolfokam
+submissions/          @fasseu @blessing @fiifi @arnolfokam
 modules/*/checks.py   @arnolfokam
 ```
 

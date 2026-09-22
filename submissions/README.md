@@ -11,7 +11,7 @@ submissions/
 ```
 
 The handle has to match your GitHub username exactly — the check compares it against the author of
-the pull request, and it is how the [dashboard](../docs/index.html) knows the work is yours.
+the pull request, and it is how the [dashboard](https://REPLACE-ME.github.io/research-gym/) knows the work is yours.
 
 **Read other people's folders.** Once something is merged it is there to be read, and seeing four
 different ways through the same module is worth more than any amount of extra practice. Just don't

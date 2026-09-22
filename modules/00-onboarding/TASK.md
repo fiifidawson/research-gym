@@ -12,7 +12,7 @@ The JSON is not the point. The point is that by the end of the week you will hav
 opened a pull request, watched a robot check it, had a person approve it, and merged — and you will
 have done all of that on something where being wrong costs nothing.
 
-Roughly a third of us have never opened a pull request. That is a completely normal place to be
+Not everyone here has opened a pull request before. That is a completely normal place to be
 coming from, and it is a far better thing to discover on a profile file than on module 08. Everyone
 does this module, including the people who could do it in their sleep, because the reviewing is the
 other half and somebody has to review.
@@ -44,9 +44,14 @@ other half and somebody has to review.
 ## How you'll know it works
 
 Five checks, all about the file being complete and the handle matching the folder. Then a human
-approves, you merge, and your row appears on [the dashboard](../../docs/index.html).
+approves, you merge, and your row appears on [the dashboard](https://REPLACE-ME.github.io/research-gym/).
 
 **Done means:** 5/5 core, one approving review, merged — and one review given to someone else.
+
+## If you want a local setup
+
+Optional, and it changes nothing about what counts — but [ENVIRONMENT.md](../../ENVIRONMENT.md)
+has it: install, run the checks the way CI does, and a troubleshooting table.
 
 ## Where this goes next
 

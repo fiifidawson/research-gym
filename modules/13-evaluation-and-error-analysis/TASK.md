@@ -13,7 +13,7 @@ Along the way: baselines, ablations, failure taxonomies, writing it up.
 
 ## Why it is on the track
 
-Five of us rated this Beginner. It is also the skill that separates someone who trains models from someone who can tell you what they learned.
+Seven of the eight of us rated this Beginner or None - the single biggest gap on the team. It is also the skill that separates someone who trains models from someone who can tell you what they learned.
 
 ## Want to help build it?
 

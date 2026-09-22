@@ -6,6 +6,9 @@ link you think people should read. This page is the whole process.
 **You do not need a terminal.** The default path below is browser and editor buttons. Every step has
 the equivalent command folded underneath if you would rather type it, and some of us would.
 
+Want a local environment anyway? [ENVIRONMENT.md](ENVIRONMENT.md) — optional, and it changes
+nothing about what counts.
+
 ---
 
 ## Submitting a module
@@ -65,7 +68,7 @@ Within a minute, a comment appears listing every check by name, passed or failed
 a nudge for the ones that failed. **Push again and that same comment updates.** There is no limit on
 how many times you push; that is what it is for.
 
-Want feedback faster? The [playground](docs/playground.html) runs the identical checks in your
+Want feedback faster? The [playground](https://REPLACE-ME.github.io/research-gym/playground.html) runs the identical checks in your
 browser, instantly.
 
 ### 5. Get a review, then merge
@@ -102,7 +105,7 @@ Don't fight the formatter. `ruff format` settles arguments so reviews can be abo
 
 ## How to give a review that helps
 
-Three of us said in the survey that we couldn't review someone's code today. If that's you, this is
+Four of us said in the survey that we couldn't review someone's code today. If that's you, this is
 the section to read — and then go and do it badly once, which is how everybody starts.
 
 **Aim for two comments.** One thing that works, one thing that could be better. That's a good review.
@@ -144,7 +147,7 @@ The smallest useful contribution, and it counts. Add an entry to
 ```
 
 `module` can be `general`. The `why` is the important field — say what it's good *for*, not what
-it's about. Open a pull request; it appears on the [reading page](docs/reading.html) on merge.
+it's about. Open a pull request; it appears on the [reading page](https://REPLACE-ME.github.io/research-gym/reading.html) on merge.
 
 ## Writing a module
 

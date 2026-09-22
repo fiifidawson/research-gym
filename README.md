@@ -4,8 +4,8 @@
   <em>Reps until AI research and engineering feel ordinary.</em><br>
   <a href="modules/00-onboarding/TASK.md">Start here</a> &middot;
   <a href="CONTRIBUTING.md">How to contribute</a> &middot;
-  <a href="docs/index.html">The dashboard</a> &middot;
-  <a href="SETUP.md">Setting it up</a>
+  <a href="ENVIRONMENT.md">Setup &amp; testing</a> &middot;
+  <a href="SETUP.md">Maintainers</a>
 </p>
 
 ---
@@ -71,7 +71,7 @@ gym/             tiny shared helpers (seeding, toy datasets, the Check type)
 
 **One `checks.py`, two runners.** Each check is written exactly once. CI hands the list to pytest so
 the pull request comment can print the names verbatim; the
-[browser playground](docs/playground.html) loads the very same file into Pyodide for instant
+[browser playground](https://REPLACE-ME.github.io/research-gym/playground.html) loads the very same file into Pyodide for instant
 feedback while you work. They cannot disagree, because there is only one copy of each assertion.
 
 Everyone has their own folder under `submissions/`, so eight people can work at once without a
@@ -90,16 +90,17 @@ Deployed from `docs/` on every push to `main`:
 
 ## Running things locally (entirely optional)
 
+Nothing here is required — the pull request is the test runner. But if you want an editor with
+autocomplete, a debugger, or instant feedback:
+
 ```bash
 pip install -e ".[checks]"
-
-# check a submission the way CI will
 SUBMISSION_DIR=submissions/your-handle/01-oop-refresher pytest modules/01-oop-refresher/tests
-
-# serve the site, playground included
-python .github/scripts/build_browser_bundle.py
-python -m http.server -d docs
 ```
+
+[**ENVIRONMENT.md**](ENVIRONMENT.md) has the full version: the three ways to get feedback, venv /
+uv / conda, the Windows commands, the useful pytest flags, how to read a failure, serving the site,
+and a troubleshooting table.
 
 ## House rules
 
@@ -107,7 +108,7 @@ python -m http.server -d docs
 - Only ever edit files inside `submissions/<your-handle>/`. The check enforces this, kindly.
 - Don't edit `checks.py` or `tests/` — if a check is wrong, and sometimes one is, open an issue.
   Fixing a bad check is a genuine contribution; it just belongs in its own pull request.
-- Review someone else's work each week. Three of us said we couldn't review code today; that is
+- Review someone else's work each week. Four of us said we couldn't review code today; that is
   exactly the thing this fixes, and the only way to fix it is to do it.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, including how to give a review that helps.

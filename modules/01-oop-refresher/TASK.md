@@ -2,7 +2,7 @@
 
 **Build:** `Layer`, `Linear`, `ReLU`, `Sequential` and `num_parameters`, in NumPy.
 **Submit:** `submissions/<your-handle>/01-oop-refresher/nn.py`
-**Starter:** [`starter/nn.py`](starter/nn.py) · **Checks:** [`checks.py`](checks.py) · [practise in the browser](../../docs/playground.html)
+**Starter:** [`starter/nn.py`](starter/nn.py) · **Checks:** [`checks.py`](checks.py) · [practise in the browser](https://REPLACE-ME.github.io/research-gym/playground.html?module=01-oop-refresher)
 
 ---
 
@@ -52,7 +52,7 @@ checks look them up by name, and module 02 imports this file.
 5. **`num_parameters(layer)`** — a plain function. Works on a `Linear` and on a `Sequential`
    without knowing which it got.
 
-**Why the seed is a check and not a footnote:** six of the eight of us rated reproducible
+**Why the seed is a check and not a footnote:** five of the eight of us rated reproducible
 experiments Beginner or None. `np.random.randn` reads a hidden global; two people running your code
 get two answers and neither knows. Every module from here on seeds explicitly.
 
@@ -71,10 +71,15 @@ pull request this week, which is worth more than any of these.
 Open the pull request. A check runs and comments with every item above, passed or failed, in
 English. Push again and the comment updates. When all 18 core checks are green, ask for a review.
 
-Impatient? The [browser playground](../../docs/playground.html?module=01-oop-refresher) runs the
+Impatient? The [browser playground](https://REPLACE-ME.github.io/research-gym/playground.html?module=01-oop-refresher) runs the
 identical checks with no round trip — it is literally the same `checks.py` file.
 
 **Done means:** 18/18 core, one approving review, merged. Stretch checks never block a merge.
+
+## If you want a local setup
+
+Optional, and it changes nothing about what counts — but [ENVIRONMENT.md](../../ENVIRONMENT.md)
+has it: install, run the checks the way CI does, and a troubleshooting table.
 
 ## Where this goes next
 

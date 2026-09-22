@@ -13,7 +13,7 @@ Along the way: configs, run directories, ablations, reading your own results.
 
 ## Why it is on the track
 
-Six of the eight of us rated this Beginner or None, which makes it the single biggest gap on the team. A result you cannot rerun is not a result yet.
+Five of the eight of us rated this Beginner or None, which makes it one of the two biggest gaps on the team. A result you cannot rerun is not a result yet.
 
 ## Want to help build it?
 

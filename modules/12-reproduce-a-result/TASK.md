@@ -13,7 +13,7 @@ Along the way: reading a paper for its method, scoping, negative results.
 
 ## Why it is on the track
 
-Four of us rated 'implementing a method from a paper' Beginner. Reproducing something small is how that stops being true, and it is the most honest test of everything above.
+Four of us rated 'implementing a method from a paper' Beginner or None. Reproducing something small is how that stops being true, and it is the most honest test of everything above.
 
 ## Want to help build it?
 
