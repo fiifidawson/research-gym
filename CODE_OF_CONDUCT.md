@@ -1,44 +1,37 @@
 # Code of conduct
 
-This is a group of people learning in public, which means being visibly wrong in front of each
-other on a regular basis. That only works if it is safe.
+People here are learning in public, which means being wrong in front of each other regularly. That
+only works if it's safe.
 
-## What we expect
+## Expected
 
-**Assume everyone is here to learn, including the people who look like they already know.** The
-skills survey we all filled in has "Beginner" scattered across every row, in different places for
-different people. Nobody is behind.
+Assume everyone is here to learn, including the people who look like they already know.
 
-**Review code, never people.** "This allocates a new array on every call" is useful. "You always
-forget about allocation" is not, and it is not about the code.
+Comment on code, not people. "This allocates a new array on every call" is useful. "You always
+forget about allocation" isn't.
 
-**Say when you are stuck, and say it early.** It is the single most useful thing you can do for the
-person who is stuck on the same thing next week and has not said so yet.
+Say when you're stuck, early. It helps whoever is stuck on the same thing next week.
 
-**Answer the question that was asked.** If someone asks how `__call__` works, they do not need to
-hear that they should have used PyTorch.
+Answer the question that was asked.
 
-**Assume good faith in review comments**, and write them so that assumption is easy.
+Credit people. If someone's solution taught you something, say so on their pull request.
 
-**Credit people.** If someone's solution taught you something, say so on their pull request.
+## Not accepted
 
-## What we don't accept
+Harassment, discrimination or demeaning comments, including the quiet kind: the sigh at a basic
+question, the review that's really about the person, the running joke at one person's expense.
 
-Harassment, discrimination, or demeaning comments of any kind — including the quiet kind: the sigh
-at a basic question, the review that is really about the person, the running joke at one person's
-expense.
+Sharing someone's private information.
 
-Sharing someone's private information. Behaviour that would make a reasonable person stop asking
-questions in public.
+Anything that would make a reasonable person stop asking questions in public.
 
 ## If something goes wrong
 
-Tell a maintainer directly. You do not have to raise it publicly, you do not have to be certain, and
-you will not be asked to justify feeling uncomfortable before it is looked into.
+Tell a maintainer directly. You don't have to raise it publicly or be certain first.
 
-Maintainers will respond privately first. Consequences range from a quiet word to removal from the
-repo, depending on what happened.
+Maintainers respond privately. Consequences range from a word to removal, depending on what
+happened.
 
 ## Scope
 
-Anywhere this group operates: pull requests, issues, reviews, calls, and the chat.
+Pull requests, issues, reviews, calls, chat.

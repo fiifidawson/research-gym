@@ -1,25 +1,21 @@
 # 10 · Fine-tuning to classify
 
-> **Not open yet.** This is a placeholder so you can see where the track goes. It opens when
-> the cohort reaches it — phase: *An LLM from scratch*.
+**Not open yet.** Placeholder, so the track is visible. Phase: LLM from scratch.
 
----
+## What it will be
 
-## What it will ask you to build
+Swap the head, freeze what you can, beat a baseline you chose first.
 
-Swap the head, freeze what you can, and beat a baseline you chose in advance.
+## Reading
 
-## Read first
+Chapter 6 of [Build a Large Language Model (From Scratch)](https://sebastianraschka.com/llms-from-scratch/) by Sebastian Raschka. Read the chapter, then build it without looking.
 
-Chapter 6 of [*Build a Large Language Model (From Scratch)*](https://sebastianraschka.com/llms-from-scratch/) by Sebastian Raschka. Read the chapter, then build it without looking. Looking afterwards is the point; looking during is how you end up with code you cannot debug.
+## Why it's on the track
 
-## Why it is on the track
+Most applied work is this. Pick the baseline before you see the numbers.
 
-Most applied work is this module. Pick the baseline before you see the numbers.
+## Writing it
 
-## Want to help build it?
-
-Writing a module is a real contribution and a good way to learn the material twice. Open an
-issue with the `module-help` template saying you would like to take it, and we will pair you
-with whoever has done it before. A module is: a `TASK.md` like this one, a `starter/`, and a
-`checks.py` full of named checks (see [module 01's](../01-oop-refresher/checks.py) for the shape).
+Modules are written by whoever wants to learn the material properly. Open an issue with the
+`module-help` template if you'd like to take this one. The shape is in
+[CONTRIBUTING.md](../../CONTRIBUTING.md#writing-a-module); module 01 is the worked example.

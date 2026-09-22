@@ -4,60 +4,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Playground &middot; research-gym</title>
-<meta name="description" content="Run a module's real checks in your browser, before you open the pull request.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>&#127947;</text></svg>">
+<meta name="description" content="Run a module's checks in your browser before opening the pull request.">
 <link rel="stylesheet" href="assets/style.css">
+<script src="assets/theme.js"></script>
 </head>
 <body>
 
-<header class="site">
+<header>
   <div class="wrap">
-    <a class="brand" href="./">research<span>-</span>gym</a>
-    <nav class="site">
+    <a class="home" href="./">research-gym</a>
+    <nav>
       <a href="./">Home</a>
       <a href="playground.html" aria-current="page">Playground</a>
       <a href="reading.html">Reading</a>
       <a id="repo-link" href="#">Repo</a>
+      <button id="theme" type="button">Dark</button>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
+  <h1>Playground</h1>
+  <p>The same checks your pull request will run, without the wait.</p>
 
-  <div class="hero">
-    <h1>Playground</h1>
-    <p>The same checks your pull request will run, only instantly and without leaving the page.</p>
-  </div>
-
-  <p class="banner">
-    <strong>This is practice, not submission.</strong> Nothing here is saved or seen by anyone. When
-    the checks go green, commit the file to your branch and open the pull request &mdash; that is the
-    run that counts.
+  <p class="note">
+    Nothing here is saved or submitted. When the checks pass, commit the file and open the pull
+    request. NumPy modules only — PyTorch can't run in a browser.
   </p>
 
   <div class="controls">
     <select id="module" aria-label="Module"></select>
-    <button id="run" class="primary" disabled>Run the checks</button>
-    <button id="reset">Reset to starter</button>
-    <label class="filebtn">Open a file&hellip;<input type="file" id="file" accept=".py" hidden></label>
-    <span class="status" id="status">Starting Python&hellip;</span>
+    <button id="run" class="primary" disabled>Run</button>
+    <button id="reset">Reset</button>
+    <label class="filebtn">Open file<input type="file" id="file" accept=".py" hidden></label>
+    <span id="status">Starting Python…</span>
   </div>
 
-  <div class="play-grid">
-    <div>
-      <textarea id="code" spellcheck="false" aria-label="Your code"></textarea>
-    </div>
-    <div id="results-pane">
-      <p class="empty">Results will appear here.</p>
-    </div>
+  <div class="cols">
+    <div><textarea id="code" spellcheck="false" aria-label="Your code"></textarea></div>
+    <div id="results-pane"><p class="muted small">Results appear here.</p></div>
   </div>
-
 </main>
 
-<footer class="site">
-  <div class="wrap">
-    <span>Only the NumPy modules run in the browser &mdash; PyTorch cannot. From module 04 on, the pull request is the only runner.</span>
-  </div>
+<footer>
+  <div class="wrap">Ctrl/Cmd+Enter runs the checks.</div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/pyodide@0.26.4/pyodide.js"></script>

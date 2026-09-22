@@ -1,23 +1,19 @@
 # 14 · Post-training
 
-> **Not open yet.** This is a placeholder so you can see where the track goes. It opens when
-> the cohort reaches it — phase: *Research craft*.
+**Not open yet.** Placeholder, so the track is visible. Phase: Research.
 
----
+## What it will be
 
-## What it will ask you to build
+LoRA, then DPO, then GRPO.
 
-LoRA, then DPO, then GRPO. The first one you will implement; the others you will run and read.
+Covers: parameter-efficient fine-tuning, preference optimisation, RL on language models.
 
-Along the way: parameter-efficient fine-tuning, preference optimisation, RL on language models.
+## Why it's on the track
 
-## Why it is on the track
+LoRA, DPO, GRPO - the methods most of the team said they wanted to get to.
 
-Where the team's stated interests converge: LoRA, DPO, GRPO, and the RL that several of us want to get to.
+## Writing it
 
-## Want to help build it?
-
-Writing a module is a real contribution and a good way to learn the material twice. Open an
-issue with the `module-help` template saying you would like to take it, and we will pair you
-with whoever has done it before. A module is: a `TASK.md` like this one, a `starter/`, and a
-`checks.py` full of named checks (see [module 01's](../01-oop-refresher/checks.py) for the shape).
+Modules are written by whoever wants to learn the material properly. Open an issue with the
+`module-help` template if you'd like to take this one. The shape is in
+[CONTRIBUTING.md](../../CONTRIBUTING.md#writing-a-module); module 01 is the worked example.

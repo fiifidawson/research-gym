@@ -1,9 +1,8 @@
-/* Runs a module's real checks.py inside the browser, under Pyodide.
+/* Runs a module's checks.py in the browser, under Pyodide.
 
-   The files under docs/_browser/ are copies, made at deploy time by
-   .github/scripts/build_browser_bundle.py, of the very same gym/ and checks.py
-   that CI uses. If you find yourself about to reimplement a check here, stop -
-   the whole design rests on there being exactly one copy of each assertion. */
+   docs/_browser/ holds copies of gym/ and checks.py, made at deploy time by
+   .github/scripts/build_browser_bundle.py. Don't reimplement a check here -
+   there should only ever be one copy of each assertion. */
 
 const GYM_FILES = ["__init__.py", "checks.py", "data.py", "seed.py"];
 const SITE_DIR = "/home/pyodide/site";
@@ -98,8 +97,8 @@ async function selectModule(id) {
   $("code").value = saved ?? state.starters.get(id);
   $("results-pane").replaceChildren(
     Object.assign(document.createElement("p"), {
-      className: "empty",
-      textContent: `Editing ${entry.entrypoint}. Results will appear here.`,
+      className: "muted small",
+      textContent: `Editing ${entry.entrypoint}.`,
     })
   );
 }
@@ -131,7 +130,7 @@ function renderBlocker(message) {
   const pane = $("results-pane");
   pane.replaceChildren();
   pane.append(
-    Object.assign(document.createElement("h3"), { className: "group", textContent: "Could not run" }),
+    Object.assign(document.createElement("p"), { className: "group", textContent: "Could not run" }),
     Object.assign(document.createElement("pre"), { textContent: message })
   );
   status("Your file did not load.");
@@ -149,9 +148,9 @@ function render(payload) {
 
     const passed = results.filter((r) => r.passed).length;
     pane.append(
-      Object.assign(document.createElement("h3"), {
+      Object.assign(document.createElement("p"), {
         className: "group",
-        textContent: `${label} — ${passed} of ${results.length}`,
+        textContent: `${label}: ${passed} of ${results.length}`,
       })
     );
 
@@ -187,8 +186,8 @@ function render(payload) {
   const remaining = core.filter((r) => !r.passed).length;
   status(
     remaining === 0
-      ? "All core checks pass - commit it and open the pull request."
-      : `${remaining} core check${remaining === 1 ? "" : "s"} to go.`
+      ? "Core checks pass. Commit it and open the pull request."
+      : `${remaining} core check${remaining === 1 ? "" : "s"} left.`
   );
 }
 
@@ -197,7 +196,7 @@ function save() {
   try {
     localStorage.setItem(`research-gym:${state.module.id}`, $("code").value);
   } catch {
-    /* private window, or storage is full. Losing a draft is survivable. */
+    /* private window or full storage; the draft just isn't kept */
   }
 }
 

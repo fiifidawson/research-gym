@@ -1,118 +1,81 @@
-<h1 align="center">research-gym</h1>
+# research-gym
 
-<p align="center">
-  <em>Reps until AI research and engineering feel ordinary.</em><br>
-  <a href="modules/00-onboarding/TASK.md">Start here</a> &middot;
-  <a href="CONTRIBUTING.md">How to contribute</a> &middot;
-  <a href="ENVIRONMENT.md">Setup &amp; testing</a> &middot;
-  <a href="SETUP.md">Maintainers</a>
-</p>
+Build a neural network from scratch, then an LLM. One module at a time, submitted as a pull request
+that gets checked automatically and reviewed by someone on the team.
 
----
+You don't run tests yourself. Opening the pull request runs them, and a comment tells you which
+checks passed and which didn't.
 
-A shared repo for a small group getting good at AI research and engineering together. You build a
-neural network from nothing, then an LLM, one module at a time. Each module is a pull request that a
-robot checks and a teammate reviews.
+## Start
 
-**You never run a test on your own machine.** Opening the pull request *is* running the tests. The
-check comments back in plain English, updates itself every time you push, and the same comment is
-how your reviewer sees where you got to.
+1. Read [`modules/00-onboarding/TASK.md`](modules/00-onboarding/TASK.md) — a ten-minute module that
+   walks the whole loop once.
+2. Then [module 01](modules/01-oop-refresher/TASK.md).
 
-```
-┌──────────────┐   ┌───────────────┐   ┌──────────────┐   ┌───────┐
-│  write code  │ → │  open the PR  │ → │  get a review│ → │ merge │
-└──────────────┘   └───────┬───────┘   └──────────────┘   └───┬───┘
-                           │                                  │
-                   robot comments with                   your row on the
-                   every check, in English                 dashboard ticks
-```
+You can do all of it from the browser. Press <kbd>.</kbd> on any repo page for an editor.
+[CONTRIBUTING.md](CONTRIBUTING.md) has the steps.
 
-## Start here
+## Modules
 
-1. **Read [`modules/00-onboarding/TASK.md`](modules/00-onboarding/TASK.md).** It is a ten-minute
-   module whose only purpose is to walk you through the whole loop once, on something where being
-   wrong costs nothing.
-2. Then take [module 01](modules/01-oop-refresher/TASK.md), and the neural network starts.
-
-No terminal required at any point — [CONTRIBUTING.md](CONTRIBUTING.md) gives the browser/editor path
-first, with the equivalent commands tucked into collapsed blocks for anyone who prefers them.
-
-## The track
-
-| | Phase | What happens |
+| | Phase | |
 |---|---|---|
-| 00 | Onboarding | One pull request, reviewed and merged. The rehearsal. |
-| 01–03 | Fundamentals | `Layer`, `Linear`, `Sequential`; then autograd; then a training loop. All NumPy, nothing magic. |
-| 04–05 | PyTorch and experiments | The same model in a real framework, then the habits that make a result trustworthy. |
-| 06–11 | An LLM from scratch | Tokenizer, attention, GPT, pretraining, fine-tuning — following Sebastian Raschka's [*Build a Large Language Model (From Scratch)*](https://sebastianraschka.com/llms-from-scratch/), chapter by chapter. |
-| 12–14 | Research craft | Reproduce a result, evaluate it honestly, then LoRA / DPO / GRPO. |
+| 00 | Onboarding | One pull request, reviewed and merged. |
+| 01–03 | Fundamentals | `Layer`, `Linear`, `Sequential`, then autograd, then a training loop. NumPy only. |
+| 04–05 | PyTorch | The same model in PyTorch, then configs, seeds and run directories. |
+| 06–11 | LLM from scratch | Tokenizer, attention, GPT, pretraining, fine-tuning. Follows [Raschka's book](https://sebastianraschka.com/llms-from-scratch/), a chapter each. |
+| 12–14 | Research | Reproduce a result, evaluate it, then LoRA / DPO / GRPO. |
 
-Every module has **core** checks everyone is expected to pass and **stretch** checks that are
-genuinely optional, so the same module works whether this is familiar ground or brand new.
+Each module has **core** checks that have to pass and **stretch** checks that don't.
 
-Modules 02 onward are roadmap stubs today. [Writing one is a real contribution](CONTRIBUTING.md#writing-a-module),
-and a good way to learn the material twice.
+Modules 02 onwards are stubs. [Writing one](CONTRIBUTING.md#writing-a-module) is a good way to learn
+the material properly.
 
-## How it fits together
+## Layout
 
 ```
 modules/01-oop-refresher/
-  TASK.md        what to build, why it matters, what to read
-  starter/nn.py  a skeleton full of TODOs — copy it, don't edit it
-  checks.py      the spec: named checks like "ReLU zeroes negative values"
-  tests/         six lines that hand checks.py to pytest
+  TASK.md        what to build
+  starter/nn.py  skeleton with TODOs - copy it, don't edit it
+  checks.py      the checks, by name
+  tests/         hands checks.py to pytest
 
 submissions/
-  your-handle/01-oop-refresher/nn.py     ← your work goes here, and nowhere else
+  your-handle/01-oop-refresher/nn.py     your work, and only yours
 
-docs/            the site, plain HTML, deployed by GitHub Actions
-gym/             tiny shared helpers (seeding, toy datasets, the Check type)
+docs/            the site
+gym/             shared helpers (seeding, toy data, the Check type)
 ```
 
-**One `checks.py`, two runners.** Each check is written exactly once. CI hands the list to pytest so
-the pull request comment can print the names verbatim; the
-[browser playground](https://REPLACE-ME.github.io/research-gym/playground.html) loads the very same file into Pyodide for instant
-feedback while you work. They cannot disagree, because there is only one copy of each assertion.
+Each check is written once, in `checks.py`. CI runs it through pytest; the
+[playground](https://REPLACE-ME.github.io/research-gym/playground.html) runs the same file in your
+browser via Pyodide. They can't disagree.
 
-Everyone has their own folder under `submissions/`, so eight people can work at once without a
-single merge conflict — and so you can read how everyone else solved the same problem the moment
-they merge.
+Everyone works in their own folder under `submissions/`, so nobody hits a merge conflict and
+everyone can read everyone else's solution once it's merged.
 
-## The site
+## Rules
 
-Deployed from `docs/` on every push to `main`:
+- One module per pull request.
+- Only edit files in `submissions/<your-handle>/`.
+- Don't edit `checks.py` or `tests/`. If a check looks wrong, open an issue.
+- Review someone else's pull request each week.
 
-- **Dashboard** — who has finished what, rebuilt from scratch after each merge by re-running every
-  merged submission against the current checks. It cannot quietly go stale.
-- **Playground** — the real checks, in your browser, no round trip. NumPy modules only; PyTorch
-  cannot run in Pyodide, so from module 04 the pull request is the only runner.
-- **Reading** — grouped by module. Adding one is a one-line pull request, and it counts.
+The check enforces the first three and explains itself if you trip one.
 
-## Running things locally (entirely optional)
+## Local setup
 
-Nothing here is required — the pull request is the test runner. But if you want an editor with
-autocomplete, a debugger, or instant feedback:
+Optional. The pull request is the test runner.
 
 ```bash
 pip install -e ".[checks]"
 SUBMISSION_DIR=submissions/your-handle/01-oop-refresher pytest modules/01-oop-refresher/tests
 ```
 
-[**ENVIRONMENT.md**](ENVIRONMENT.md) has the full version: the three ways to get feedback, venv /
-uv / conda, the Windows commands, the useful pytest flags, how to read a failure, serving the site,
-and a troubleshooting table.
+[ENVIRONMENT.md](ENVIRONMENT.md) covers the rest: venv/uv/conda, Windows commands, pytest flags,
+serving the site, troubleshooting.
 
-## House rules
-
-- One module per pull request.
-- Only ever edit files inside `submissions/<your-handle>/`. The check enforces this, kindly.
-- Don't edit `checks.py` or `tests/` — if a check is wrong, and sometimes one is, open an issue.
-  Fixing a bad check is a genuine contribution; it just belongs in its own pull request.
-- Review someone else's work each week. Four of us said we couldn't review code today; that is
-  exactly the thing this fixes, and the only way to fix it is to do it.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the details, including how to give a review that helps.
+Setting up a fresh copy of this repo: [SETUP.md](SETUP.md).
 
 ## Licence
 
-[MIT](LICENSE). The book is Sebastian Raschka's and is not included here — buy it, it's worth it.
+[MIT](LICENSE). The book isn't included - buy it.

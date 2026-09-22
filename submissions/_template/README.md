@@ -1,16 +1,14 @@
-# The shape of a submissions folder
+# Folder layout
 
-Copy this layout, replacing `_template` with your GitHub handle:
+Copy this, replacing `_template` with your GitHub handle:
 
 ```
 submissions/your-handle/
-  00-onboarding/profile.json   ← start here
+  00-onboarding/profile.json
   01-oop-refresher/nn.py
 ```
 
-One directory per module, named exactly like the one under `modules/`, containing exactly the file
-the module's `TASK.md` asks for. The check looks it up by name, so `nn.py` cannot be `NN.py` or
-`nn_solution.py`.
+One directory per module, named exactly like the one under `modules/`, containing the file that
+module's `TASK.md` asks for. The name must match — `nn.py`, not `NN.py` or `nn_solution.py`.
 
-Anything else you put in your folder — notes, a scratch script, a plot — is yours and is ignored by
-the checks.
+Anything else you put in your folder is yours and gets ignored by the checks.

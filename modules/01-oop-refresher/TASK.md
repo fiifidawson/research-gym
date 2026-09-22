@@ -1,88 +1,71 @@
 # 01 · OOP refresher
 
-**Build:** `Layer`, `Linear`, `ReLU`, `Sequential` and `num_parameters`, in NumPy.
 **Submit:** `submissions/<your-handle>/01-oop-refresher/nn.py`
-**Starter:** [`starter/nn.py`](starter/nn.py) · **Checks:** [`checks.py`](checks.py) · [practise in the browser](https://REPLACE-ME.github.io/research-gym/playground.html?module=01-oop-refresher)
+**Starter:** [`starter/nn.py`](starter/nn.py) · **Checks:** [`checks.py`](checks.py)
 
----
+## What you're building
 
-## Why this matters
+The forward pass of a small neural network, in NumPy, built out of classes: `Layer`, `Linear`,
+`ReLU`, `Sequential`, and a `num_parameters` function.
 
-Eight of us filled in the skills survey and eight of us put "Intermediate" next to
-object-oriented programming. Nobody put Advanced. That is not a coincidence — OOP is the thing
-most people learn just well enough to read and never quite well enough to design with.
+No gradients. That's module 02.
 
-It matters here specifically, because every deep learning framework is one idea:
+## Why
 
-> A model is an object that holds parameters and knows how to turn an input into an output.
-> A model made of models is the same kind of object.
+Every deep learning framework rests on one idea: a model is an object that holds parameters and
+turns an input into an output, and a model made of models is the same kind of object.
+`torch.nn.Module` is that, with a lot of engineering on top.
 
-`torch.nn.Module` is that sentence, plus a decade of engineering. If you build the small version
-yourself this week, PyTorch in module 04 will feel like a library rather than a mystery, and the
-transformer block in module 08 will be forty lines instead of a wall.
-
-You are writing the forward pass only. Gradients are module 02 — resist the urge.
+Build the small version now and PyTorch in module 04 is an API to learn rather than a new concept.
+The transformer block in module 08 is this same `Sequential` pattern.
 
 ## Read first
 
-Twenty minutes, not two hours. Skim, build, come back when something bites.
+- [Python data model](https://docs.python.org/3/reference/datamodel.html#special-method-names) -
+  `__call__`, `__repr__`, `__len__`, `__getitem__`.
+- [`abc`](https://docs.python.org/3/library/abc.html) - abstract base classes.
+- [NumPy broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html) - why `x @ W + b` works.
+- [NumPy random generators](https://numpy.org/doc/stable/reference/random/generator.html) - `default_rng`.
 
-- [The Python data model](https://docs.python.org/3/reference/datamodel.html#special-method-names) —
-  `__call__`, `__repr__`, `__len__`, `__getitem__`. Most of this module lives on that page.
-- [`abc` — abstract base classes](https://docs.python.org/3/library/abc.html) — why `Layer()` should refuse.
-- [NumPy broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html) — why `x @ W + b` works.
-- [NumPy random generators](https://numpy.org/doc/stable/reference/random/generator.html) — why `default_rng(seed)`
-  and not `np.random.randn`.
+## Core
 
-## Build this (core)
+Copy `starter/nn.py` into your folder and work through the TODOs. Keep the names exactly as given -
+the checks look them up by name, and module 02 imports this file.
 
-Copy `starter/nn.py` to your folder and work through the TODOs. Keep every name identical — the
-checks look them up by name, and module 02 imports this file.
+1. **`Layer`** - abstract. `forward` is abstract. `__call__`, `parameters()` and `__repr__` are
+   defined here once and inherited.
+2. **`Linear(in_features, out_features, *, seed=None)`** - `W` of shape `(in, out)`, `b` of zeros.
+   He init, std `sqrt(2 / in_features)`, from `np.random.default_rng(seed)`. `forward` returns
+   `x @ W + b`. `parameters()` returns `[W, b]`. `__repr__` is exactly
+   `Linear(in_features=3, out_features=2)`.
+3. **`ReLU`** - returns a new array, doesn't modify its input.
+4. **`Sequential(*layers)`** - is a `Layer` and contains `Layer`s. Chains `forward`, flattens
+   `parameters()`, supports `len()` and indexing, builds its `repr` from its children's.
+5. **`num_parameters(layer)`** - a function. Works on a `Linear` or a `Sequential` without knowing
+   which one it got.
 
-1. **`Layer`** — abstract. `forward` is abstract; `__call__`, `parameters()` and `__repr__` are
-   written *once* here and inherited. If you find yourself writing `__call__` in three subclasses,
-   that is the lesson knocking.
-2. **`Linear(in_features, out_features, *, seed=None)`** — `W` of shape `(in, out)`, `b` of zeros.
-   He initialisation, standard deviation `sqrt(2 / in_features)`, drawn from
-   `np.random.default_rng(seed)`. `forward` returns `x @ W + b`. `parameters()` returns `[W, b]`.
-   `__repr__` returns exactly `Linear(in_features=3, out_features=2)`.
-3. **`ReLU`** — returns a *new* array. No parameters; it should not need to say so.
-4. **`Sequential(*layers)`** — is a `Layer`, contains `Layer`s. Chains `forward`, flattens
-   `parameters()`, supports `len()` and `model[i]`, and its `repr` is built from its children's.
-5. **`num_parameters(layer)`** — a plain function. Works on a `Linear` and on a `Sequential`
-   without knowing which it got.
-
-**Why the seed is a check and not a footnote:** five of the eight of us rated reproducible
-experiments Beginner or None. `np.random.randn` reads a hidden global; two people running your code
-get two answers and neither knows. Every module from here on seeds explicitly.
+Use `default_rng(seed)`, not `np.random.randn`. The latter reads a global, so the same `seed=`
+argument gives different weights on different runs. One of the checks tests for this.
 
 ## Stretch
 
-Optional. Take them if module 01 was comfortable — and if it was, consider reviewing someone else's
-pull request this week, which is worth more than any of these.
+Optional, doesn't block a merge.
 
-- `Tanh` — you now know where it goes and what it inherits.
-- `LayerNorm(dim, eps=1e-5)` — `gamma` and `beta` as parameters, normalising the last axis. You will
-  build this again in PyTorch in module 08; transformers are full of it.
-- `Sequential.__iter__` — so `for layer in model:` reads the way it should.
+- `Tanh`
+- `LayerNorm(dim, eps=1e-5)` - `gamma` and `beta` as parameters, normalising the last axis. You'll
+  build it again in PyTorch in module 08.
+- `Sequential.__iter__`
 
-## How you'll know it works
+## Checking it
 
-Open the pull request. A check runs and comments with every item above, passed or failed, in
-English. Push again and the comment updates. When all 18 core checks are green, ask for a review.
+Open the pull request. The check comments with every item above, passed or failed. Push again and
+the comment updates. 18 core checks; when they're all green, ask for a review.
 
-Impatient? The [browser playground](https://REPLACE-ME.github.io/research-gym/playground.html?module=01-oop-refresher) runs the
-identical checks with no round trip — it is literally the same `checks.py` file.
+For instant feedback, the Playground page on the site runs the same `checks.py` in your browser.
 
-**Done means:** 18/18 core, one approving review, merged. Stretch checks never block a merge.
+**Done:** 18/18 core, one approval, merged.
 
-## If you want a local setup
+## Next
 
-Optional, and it changes nothing about what counts — but [ENVIRONMENT.md](../../ENVIRONMENT.md)
-has it: install, run the checks the way CI does, and a troubleshooting table.
-
-## Where this goes next
-
-Module 02 gives every operation in this file a backward pass, and you will import `nn.py` to do it.
-Module 04 replaces all of it with six lines of PyTorch — and you will know exactly what those six
-lines are doing.
+Module 02 adds a backward pass to everything here, and imports this file. Module 04 replaces it with
+a few lines of PyTorch.

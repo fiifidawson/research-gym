@@ -1,7 +1,6 @@
 {
   "title": "research-gym",
   "repo": "https://github.com/REPLACE-ME/research-gym",
-  "tagline": "Reps until AI research and engineering feel ordinary.",
   "book": {
     "title": "Build a Large Language Model (From Scratch)",
     "author": "Sebastian Raschka",
@@ -11,27 +10,27 @@
     {
       "id": "onboarding",
       "name": "Onboarding",
-      "blurb": "Open a pull request, get it reviewed, get it merged. Nothing else."
+      "blurb": "One pull request, reviewed and merged."
     },
     {
       "id": "fundamentals",
       "name": "Fundamentals",
-      "blurb": "Object-oriented Python, taught entirely by building a neural network out of NumPy."
+      "blurb": "Object-oriented Python, by building a neural network in NumPy."
     },
     {
       "id": "pytorch",
       "name": "PyTorch and experiments",
-      "blurb": "The same model in a real framework, then the habits that make a result trustworthy."
+      "blurb": "The same model in PyTorch, then configs, seeds and run directories."
     },
     {
       "id": "llm",
-      "name": "An LLM from scratch",
-      "blurb": "Raschka's book, chapter by chapter: tokenizer, attention, GPT, pretraining, fine-tuning."
+      "name": "LLM from scratch",
+      "blurb": "Raschka's book, a chapter per module."
     },
     {
       "id": "research",
-      "name": "Research craft",
-      "blurb": "Reproduce something, evaluate it honestly, write it up, then push past the book."
+      "name": "Research",
+      "blurb": "Reproduce a result, evaluate it, then post-training methods."
     }
   ],
   "modules": [
@@ -42,7 +41,7 @@
       "status": "ready",
       "browser": false,
       "entrypoint": "profile.json",
-      "summary": "Introduce yourself in a pull request and watch the whole loop run once.",
+      "summary": "A short profile of yourself, submitted as a pull request.",
       "teaches": [
         "branches",
         "pull requests",
@@ -56,7 +55,7 @@
       "status": "ready",
       "browser": true,
       "entrypoint": "nn.py",
-      "summary": "Build Layer, Linear, ReLU and Sequential in NumPy. Forward pass only.",
+      "summary": "Layer, Linear, ReLU and Sequential in NumPy. Forward pass only.",
       "teaches": [
         "abstract base classes",
         "__call__ and __repr__",
@@ -71,7 +70,7 @@
       "status": "planned",
       "browser": true,
       "entrypoint": "autograd.py",
-      "summary": "A scalar Value that remembers how it was made, and a backward() that walks it.",
+      "summary": "A scalar Value type and a backward() that walks the graph it built.",
       "teaches": [
         "operator overloading",
         "topological sort",
@@ -85,7 +84,7 @@
       "status": "planned",
       "browser": true,
       "entrypoint": "train.py",
-      "summary": "Dataset, DataLoader, SGD and Trainer. Fit an MLP to two moons and watch the loss fall.",
+      "summary": "Dataset, DataLoader, SGD and Trainer. Fit an MLP to two moons.",
       "teaches": [
         "iterators",
         "dataclass configs",
@@ -99,7 +98,7 @@
       "status": "planned",
       "browser": false,
       "entrypoint": "model.py",
-      "summary": "The same MLP as an nn.Module. The check asserts it matches your module 03 result.",
+      "summary": "The same MLP as an nn.Module, checked against your module 03 result.",
       "teaches": [
         "nn.Module",
         "tensors and devices",
@@ -113,7 +112,7 @@
       "status": "planned",
       "browser": false,
       "entrypoint": "experiment.py",
-      "summary": "A config file, a seeded run directory, a metrics.json, a results table and one ablation.",
+      "summary": "A config file, a seeded run directory, a metrics file and one ablation.",
       "teaches": [
         "configs",
         "run directories",
@@ -128,7 +127,7 @@
       "status": "planned",
       "browser": false,
       "entrypoint": "tokenizer.py",
-      "summary": "Byte-pair encoding, a vocabulary, and the embedding table it feeds.",
+      "summary": "Byte-pair encoding, a vocabulary, and the embedding table.",
       "book_chapter": 2
     },
     {
@@ -148,7 +147,7 @@
       "status": "planned",
       "browser": false,
       "entrypoint": "gpt.py",
-      "summary": "Blocks, residuals, LayerNorm and a head. Your module 01 Sequential, grown up.",
+      "summary": "Blocks, residuals, LayerNorm and a head.",
       "book_chapter": 4
     },
     {
@@ -158,7 +157,7 @@
       "status": "planned",
       "browser": false,
       "entrypoint": "pretrain.py",
-      "summary": "A real training loop on real text, with checkpoints and sampling.",
+      "summary": "A training loop on real text, with checkpoints and sampling.",
       "book_chapter": 5
     },
     {
@@ -168,7 +167,7 @@
       "status": "planned",
       "browser": false,
       "entrypoint": "finetune.py",
-      "summary": "Swap the head, freeze what you can, and beat a baseline you chose in advance.",
+      "summary": "Swap the head, freeze what you can, beat a baseline you chose first.",
       "book_chapter": 6
     },
     {
@@ -178,7 +177,7 @@
       "status": "planned",
       "browser": false,
       "entrypoint": "instruct.py",
-      "summary": "Format, train, and then judge the output without fooling yourself.",
+      "summary": "Format, train, then evaluate the output without fooling yourself.",
       "book_chapter": 7
     },
     {
@@ -188,7 +187,7 @@
       "status": "planned",
       "browser": false,
       "entrypoint": "reproduce.py",
-      "summary": "Pick a small published result. Get within error bars. Document every place you could not.",
+      "summary": "Pick a small published result and get within error bars of it.",
       "teaches": [
         "reading a paper for its method",
         "scoping",
@@ -202,7 +201,7 @@
       "status": "planned",
       "browser": false,
       "entrypoint": "evaluate.py",
-      "summary": "Baselines, ablations, and fifty failure cases read by hand. Ends in a short written report.",
+      "summary": "Baselines, ablations, and failure cases read by hand. Ends in a short report.",
       "teaches": [
         "baselines",
         "ablations",
@@ -217,7 +216,7 @@
       "status": "planned",
       "browser": false,
       "entrypoint": "post_training.py",
-      "summary": "LoRA, then DPO, then GRPO. The first one you will implement; the others you will run and read.",
+      "summary": "LoRA, then DPO, then GRPO.",
       "teaches": [
         "parameter-efficient fine-tuning",
         "preference optimisation",

@@ -4,45 +4,37 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Reading &middot; research-gym</title>
-<meta name="description" content="What to read alongside each module. Adding one is a one-line pull request.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>&#127947;</text></svg>">
+<meta name="description" content="Reading for each module.">
 <link rel="stylesheet" href="assets/style.css">
+<script src="assets/theme.js"></script>
 </head>
 <body>
 
-<header class="site">
+<header>
   <div class="wrap">
-    <a class="brand" href="./">research<span>-</span>gym</a>
-    <nav class="site">
+    <a class="home" href="./">research-gym</a>
+    <nav>
       <a href="./">Home</a>
       <a href="playground.html">Playground</a>
       <a href="reading.html" aria-current="page">Reading</a>
       <a id="repo-link" href="#">Repo</a>
+      <button id="theme" type="button">Dark</button>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
+  <h1>Reading</h1>
+  <p>Grouped by module. None of it is compulsory.</p>
+  <p class="small muted">
+    To add something, put a line in <code>docs/data/reading.json</code> and open a pull request.
+  </p>
 
-  <div class="hero">
-    <h1>Reading</h1>
-    <p>
-      Grouped by the module it helps with. Nothing here is compulsory and nothing here is long.
-      Found something better? Add it to <code>docs/data/reading.json</code> and open a pull request -
-      it is the smallest useful contribution anyone can make, and it counts.
-    </p>
-  </div>
-
-  <section>
-    <div id="reading"><p class="empty">Loading&hellip;</p></div>
-  </section>
-
+  <div id="reading"></div>
 </main>
 
-<footer class="site">
-  <div class="wrap">
-    <span>One line of JSON, one pull request, one review. That is the whole contribution process.</span>
-  </div>
+<footer>
+  <div class="wrap">Add a reading, fix a check, write a module — all of it is a pull request.</div>
 </footer>
 
 <script src="assets/app.js"></script>

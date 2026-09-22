@@ -1,23 +1,19 @@
 # 02 · Autograd from scratch
 
-> **Not open yet.** This is a placeholder so you can see where the track goes. It opens when
-> the cohort reaches it — phase: *Fundamentals*.
+**Not open yet.** Placeholder, so the track is visible. Phase: Fundamentals.
 
----
+## What it will be
 
-## What it will ask you to build
+A scalar Value type and a backward() that walks the graph it built.
 
-A scalar Value that remembers how it was made, and a backward() that walks it.
+Covers: operator overloading, topological sort, the chain rule, concretely.
 
-Along the way: operator overloading, topological sort, the chain rule, concretely.
+## Why it's on the track
 
-## Why it is on the track
+The chain rule stops being a formula once you've written the thing that applies it.
 
-Three of us put Beginner next to 'math for ML'. The chain rule stops being a formula the moment you have written the thing that applies it.
+## Writing it
 
-## Want to help build it?
-
-Writing a module is a real contribution and a good way to learn the material twice. Open an
-issue with the `module-help` template saying you would like to take it, and we will pair you
-with whoever has done it before. A module is: a `TASK.md` like this one, a `starter/`, and a
-`checks.py` full of named checks (see [module 01's](../01-oop-refresher/checks.py) for the shape).
+Modules are written by whoever wants to learn the material properly. Open an issue with the
+`module-help` template if you'd like to take this one. The shape is in
+[CONTRIBUTING.md](../../CONTRIBUTING.md#writing-a-module); module 01 is the worked example.

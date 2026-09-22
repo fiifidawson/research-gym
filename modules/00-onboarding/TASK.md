@@ -1,58 +1,47 @@
 # 00 · Onboarding
 
-**Build:** a short profile of yourself.
 **Submit:** `submissions/<your-handle>/00-onboarding/profile.json`
 **Starter:** [`starter/profile.json`](starter/profile.json) · **Checks:** [`checks.py`](checks.py)
 
----
+## What you're doing
 
-## Why this matters
+Writing a few lines about yourself, as a pull request.
 
-The JSON is not the point. The point is that by the end of the week you will have made a branch,
-opened a pull request, watched a robot check it, had a person approve it, and merged — and you will
-have done all of that on something where being wrong costs nothing.
-
-Not everyone here has opened a pull request before. That is a completely normal place to be
-coming from, and it is a far better thing to discover on a profile file than on module 08. Everyone
-does this module, including the people who could do it in their sleep, because the reviewing is the
-other half and somebody has to review.
+The file isn't the point. The point is doing the loop once - branch, pull request, check, review,
+merge - on something where a mistake costs nothing. If you've never opened a pull request, this is
+where that happens. If you've opened hundreds, you're here to review someone who hasn't.
 
 ## Read first
 
-- [Understanding the GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow) — five minutes.
-- [github.dev, the browser editor](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) —
-  press <kbd>.</kbd> on any repo page. No clone, no install, no terminal.
-- [CONTRIBUTING.md](../../CONTRIBUTING.md) — the three-step flow, with the GUI path first.
+- [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow) - five minutes.
+- [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) - press <kbd>.</kbd>
+  on any repo page for an editor. No clone, no install.
+- [CONTRIBUTING.md](../../CONTRIBUTING.md)
 
-## Build this (core)
+## Core
 
-1. Make a branch named `<your-handle>/00-onboarding`.
-2. Create `submissions/<your-handle>/00-onboarding/profile.json`, copying the starter.
-3. Fill in:
-   - `handle` — your GitHub username, matching your folder exactly.
-   - `name` — what you want to be called.
-   - `role` — one line.
-   - `track` — one of `data-and-analysis`, `ml-and-experiments`, `research-ready`. Pick where you
-     feel you are today. It changes nothing about what you are allowed to attempt; it just helps
-     whoever is pairing people up. Nobody is held to it.
-   - `here_for` — one or two real sentences on what you want to be able to *do* by the end. Be
-     specific. "Get better at ML" is not something you can tell whether you achieved.
-   - `links` — optional.
-4. Open the pull request. Fill in the template.
-5. Ask someone for a review, and **review someone else's** while you wait.
+1. Branch: `<your-handle>/00-onboarding`.
+2. Create `submissions/<your-handle>/00-onboarding/profile.json` from the starter:
+   - `handle` - your GitHub username, matching the folder.
+   - `name`, `role` - one line each.
+   - `track` - `data-and-analysis`, `ml-and-experiments` or `research-ready`. Rough self-assessment,
+     nothing depends on it.
+   - `here_for` - a sentence or two on what you want to be able to do by the end. Specific enough
+     that you could tell later whether it happened.
+   - `links` - optional.
+3. Open the pull request and fill in the template.
+4. Ask for a review, and review someone else's while you wait.
 
-## How you'll know it works
+## Checking it
 
-Five checks, all about the file being complete and the handle matching the folder. Then a human
-approves, you merge, and your row appears on [the dashboard](https://REPLACE-ME.github.io/research-gym/).
+Five checks, all about the file being complete and the handle matching the folder.
 
-**Done means:** 5/5 core, one approving review, merged — and one review given to someone else.
+**Done:** 5/5, one approval, merged, and one review given.
 
 ## If you want a local setup
 
-Optional, and it changes nothing about what counts — but [ENVIRONMENT.md](../../ENVIRONMENT.md)
-has it: install, run the checks the way CI does, and a troubleshooting table.
+Optional: [ENVIRONMENT.md](../../ENVIRONMENT.md).
 
-## Where this goes next
+## Next
 
-Module 01 starts the neural network. Everything after this is real work; this was the rehearsal.
+[Module 01](../01-oop-refresher/TASK.md) starts the neural network.

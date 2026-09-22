@@ -1,102 +1,83 @@
-# Setting it up (maintainer, once)
+# Setting up a fresh copy
 
-Everything works locally already. These are the steps that need a real GitHub repo behind them.
-Fifteen minutes, and it only happens once.
+One-time, maintainer only. Everything already works locally; these steps give it a GitHub home.
 
-## 1. Push it
+## 1. Push
 
 ```bash
 gh repo create <org-or-you>/research-gym --private --source=. --push
 ```
 
-Private to start is fine; make it public whenever you like. Nothing in here is secret — **and
-nothing in here is the survey**, which stays outside the repo and is ignored by `.gitignore`.
+Nothing in here is secret. The skills survey is not in the repo and is ignored by `.gitignore`.
 
-## 2. Replace the placeholders
+## 2. Turn on Actions and Pages
 
-Several files carry a `REPLACE-ME`:
+- Settings → Pages → Source: **GitHub Actions**
+- Settings → Actions → General → Workflow permissions: **Read and write** (the check needs this to
+  post its comment)
 
-| File | Change it to |
-|---|---|
-| `docs/data/curriculum.json` → `repo` | the repo URL |
-| `.github/ISSUE_TEMPLATE/config.yml` | the same, in both links |
-| `.github/CODEOWNERS` | real handles or real teams |
-| `README.md`, `CONTRIBUTING.md`, the `TASK.md`s | the GitHub Pages URL, in links to the site |
+Push to `main` once; the site deploys and gives you a URL.
 
-Once Pages is on (step 3) and you know the site URL, swap the rest in one go:
+## 3. Replace the placeholders
+
+Now you know the site URL:
 
 ```bash
 grep -rl REPLACE-ME --include='*.md' --include='*.json' --include='*.yml' --include='CODEOWNERS' . | xargs sed -i 's|REPLACE-ME|<org-or-you>|g'
 ```
 
-Then check nothing is left: `grep -rn REPLACE-ME . | grep -v '\.git/'`
+Check nothing is left: `grep -rn REPLACE-ME . | grep -v '\.git/'`
 
-For `CODEOWNERS`, either make two GitHub teams or just list handles:
+Then put real handles in `.github/CODEOWNERS`, either teams or a list:
 
 ```
-submissions/          @fasseu @blessing @fiifi @arnolfokam
-modules/*/checks.py   @arnolfokam
+submissions/          @handle1 @handle2 @handle3
+modules/*/checks.py   @handle1
 ```
 
-The reviewers list starts with the four people who said in the survey they could already review
-someone else's code. Everyone else joins after module 05 — that is the intended promotion, and it is
-worth saying out loud when you announce it.
+## 4. Set SITE_URL
 
-## 3. Turn on Actions and Pages
-
-- **Settings → Pages → Source: GitHub Actions.** The `Site` workflow does the rest.
-- **Settings → Actions → General → Workflow permissions: Read and write.** The check needs this to
-  post its comment.
-- Push once to `main`; the site deploys and gives you a URL.
-
-## 4. Tell the check where the site is
-
-**Settings → Secrets and variables → Actions → Variables → New repository variable:**
+Settings → Secrets and variables → Actions → Variables:
 
 ```
 SITE_URL = https://<org-or-you>.github.io/research-gym/
 ```
 
-Optional — it only adds the "practise in your browser" link to each comment.
+Optional. It adds a playground link to each check comment.
 
-## 5. Protect `main`
+## 5. Protect main
 
-**Settings → Rules → Rulesets → New branch ruleset**, targeting `main`:
+Settings → Rules → Rulesets → New branch ruleset, targeting `main`:
 
-- Require a pull request before merging — **1 approval**
-- Require status checks to pass — **`check`** (from Submission check) and **`ruff`**
-- Require branches to be up to date before merging
+- Require a pull request, **1 approval**
+- Require status checks: **`check`** and **`ruff`**
+- Require branches up to date
 
-This is what makes the review real rather than optional. Allow yourself a bypass if you want to be
-able to unstick people.
+Give yourself a bypass so you can unstick people.
 
 ## 6. Give everyone write access
 
-Collaborators, or a team with Write. Everyone works on branches in this one repo — that is what lets
-the check post comments, and what lets everyone read everyone else's solutions after a merge.
+Collaborators or a team with Write. Everyone works on branches in this repo, which is what lets the
+check post comments and lets people read each other's merged work.
 
-## 7. Do module 00 yourself, first
+## 7. Do module 00 yourself first
 
-Seriously. You will find out in ten minutes whether the comment reads well, and you will have an
-example pull request to point at when you announce it. There is a profile already at
-`submissions/arnolfokam/00-onboarding/profile.json` built from your survey answer — **edit the
-`here_for` line so it is actually yours.**
+Ten minutes, and you'll have an example pull request to point at. There's a profile at
+`submissions/arnolfokam/00-onboarding/profile.json` — edit the `here_for` line, it was written from
+a survey answer rather than by you.
 
 ## Running the week
 
-- Monday: the module opens. Announce it with a link to its `TASK.md`.
+- Monday: module opens, post the link to its `TASK.md`.
 - Friday: pull requests in.
-- Reviews are the point. Rotate them, and pair someone who has never reviewed with someone who has.
-- End of the week: fifteen minutes together on one thing that was hard. Not a demo — a debugging
-  session, ideally on somebody's failing check.
+- Rotate reviews. Pair someone who hasn't reviewed with someone who has.
+- End of week: fifteen minutes on one thing that was hard. A debugging session, not a demo.
 
-## When you want the next module
+## Adding modules
 
-Modules 02 onward are stubs. Writing one is the best way to learn the material twice, so give them
-away rather than writing them all yourself. The shape is in
-[CONTRIBUTING.md § Writing a module](CONTRIBUTING.md#writing-a-module), and module 01 is the worked
-example — a `TASK.md`, a `starter/`, a `checks.py`, and `tests/test_module.py` copied verbatim.
+02 onwards are stubs. Give them away rather than writing them all yourself — the person who writes a
+module learns it twice. Shape is in
+[CONTRIBUTING.md](CONTRIBUTING.md#writing-a-module); module 01 is the example.
 
-The one rule that matters: **write the reference solution, confirm it passes, then break it three
-ways and read the failure messages as if you were stuck.** If a message does not tell you what to do
-next, the check is not finished.
+The rule that matters: write the reference solution, confirm it passes, then break it three ways and
+read the failure messages as if you were stuck.
