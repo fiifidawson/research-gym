@@ -56,7 +56,7 @@ def here_for_is_a_real_sentence(s):
     text = str(s.load_json().get("here_for", "")).strip()
     if len(text) < 30:
         raise AssertionError(
-            f'here_for is only {len(text)} characters. Write a bit more - you will be '
+            f"here_for is only {len(text)} characters. Write a bit more - you will be "
             "asked about it at the end, and vague goals are hard to hit."
         )
 
@@ -64,8 +64,12 @@ def here_for_is_a_real_sentence(s):
 SUITE = CheckSuite(
     entrypoint="profile.json",
     checks=[
-        Check("profile.json is valid JSON", profile_is_valid_json, CORE,
-              hint="paste it into a JSON linter if you are stuck - usually a trailing comma"),
+        Check(
+            "profile.json is valid JSON",
+            profile_is_valid_json,
+            CORE,
+            hint="paste it into a JSON linter if you are stuck - usually a trailing comma",
+        ),
         Check("profile.json fills in every required field", profile_has_every_required_field, CORE),
         Check("The handle matches your submissions folder", handle_matches_the_folder, CORE),
         Check("The track is one of the three", track_is_one_of_the_three, CORE),

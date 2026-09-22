@@ -20,7 +20,9 @@ include = ["gym*"]
 
 [tool.pytest.ini_options]
 testpaths = ["modules"]
-addopts = "-q --strict-markers"
+# --import-mode=importlib: every module's tests/test_module.py is deliberately the same
+# file, so the default import mode sees a name collision the moment there are two modules.
+addopts = "-q --strict-markers --import-mode=importlib"
 markers = ["stretch: optional extension, not required to pass a module"]
 
 [tool.ruff]
@@ -49,6 +51,9 @@ ignore = [
 "modules/*/starter/*" = ["D", "ANN", "B", "F"]   # starters are full of TODOs on purpose
 "modules/*/tests/*" = ["D", "ANN"]
 "**/checks.py" = ["D103", "ANN"]
+# Repo plumbing, not teaching material: small helpers and main()s do not each need a docstring.
+".github/scripts/*" = ["D103"]
+"modules/conftest.py" = ["D103", "ANN"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

@@ -28,9 +28,7 @@ def main() -> int:
     parser.add_argument("--out", type=Path, default=REPO_ROOT / "docs/_browser")
     args = parser.parse_args()
 
-    curriculum = json.loads(
-        (REPO_ROOT / "docs/data/curriculum.json").read_text(encoding="utf-8")
-    )
+    curriculum = json.loads((REPO_ROOT / "docs/data/curriculum.json").read_text(encoding="utf-8"))
     browser_modules = [m for m in curriculum["modules"] if m.get("browser")]
 
     if args.out.exists():

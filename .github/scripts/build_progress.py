@@ -118,8 +118,13 @@ def main() -> int:
                 rows[module_dir.name] = evaluate(module_dir.name, module_dir)
             except Exception:  # noqa: BLE001 - one bad submission must not lose the rest
                 traceback.print_exc()
-                rows[module_dir.name] = {"status": "broken", "core_passed": 0, "core_total": 0,
-                                         "stretch_passed": 0, "stretch_total": 0}
+                rows[module_dir.name] = {
+                    "status": "broken",
+                    "core_passed": 0,
+                    "core_total": 0,
+                    "stretch_passed": 0,
+                    "stretch_total": 0,
+                }
         if rows:
             progress[handle] = rows
 

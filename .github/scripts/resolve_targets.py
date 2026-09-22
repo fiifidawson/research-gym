@@ -83,9 +83,7 @@ def resolve(paths: list[str], author: str) -> dict:
             "request instead - that is the more useful thing anyway."
         )
 
-    other_changes = [
-        p for p in paths if not OWNED_RE.match(p) and not p.startswith(".github/scripts/")
-    ]
+    other_changes = [p for p in paths if not OWNED_RE.match(p)]
     if targets and other_changes:
         listed = "\n".join(f"  - {p}" for p in other_changes[:10])
         return fail(
@@ -115,7 +113,11 @@ def resolve(paths: list[str], author: str) -> dict:
             f"Available: {', '.join(known_modules())}"
         )
 
-    return {"ok": True, "error": None, "targets": [{"handle": handle, "module": module, "path": path}]}
+    return {
+        "ok": True,
+        "error": None,
+        "targets": [{"handle": handle, "module": module, "path": path}],
+    }
 
 
 def main() -> int:

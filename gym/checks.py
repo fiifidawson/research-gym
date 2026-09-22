@@ -12,8 +12,9 @@ Never write an assertion anywhere else, or the two runners will drift apart.
 
 from __future__ import annotations
 
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass, field
-from typing import Any, Callable, Iterable
+from typing import Any
 
 CORE = "core"
 STRETCH = "stretch"
@@ -64,9 +65,11 @@ class CheckSuite:
     checks: list[Check] = field(default_factory=list)
 
     def core(self) -> list[Check]:
+        """The checks everyone is expected to pass."""
         return [c for c in self.checks if c.tier == CORE]
 
     def stretch(self) -> list[Check]:
+        """The optional ones. These never block a merge."""
         return [c for c in self.checks if c.tier == STRETCH]
 
 

@@ -13,6 +13,10 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 from types import ModuleType
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from gym.checks import CheckSuite
 
 
 @dataclass
@@ -27,9 +31,11 @@ class DataSubmission:
     handle: str
 
     def read_text(self) -> str:
+        """The file, verbatim."""
         return self.path.read_text(encoding="utf-8")
 
-    def load_json(self):
+    def load_json(self) -> object:
+        """Parse the file, with a message a beginner can act on when it will not."""
         try:
             return json.loads(self.read_text())
         except json.JSONDecodeError as exc:
@@ -59,14 +65,14 @@ def import_from_path(path: Path, name: str) -> ModuleType:
     return module
 
 
-def load_suite(module_dir: Path):
+def load_suite(module_dir: Path) -> CheckSuite:
     """Load the :class:`~gym.checks.CheckSuite` declared by a module."""
     module_dir = Path(module_dir)
     suite_module = import_from_path(module_dir / "checks.py", f"_checks_{module_dir.name}")
     try:
         return suite_module.SUITE
     except AttributeError as exc:  # pragma: no cover - authoring error
-        raise AttributeError(f"{module_dir/'checks.py'} must define SUITE") from exc
+        raise AttributeError(f"{module_dir / 'checks.py'} must define SUITE") from exc
 
 
 def load_submission(submission_dir: Path, entrypoint: str) -> ModuleType | DataSubmission:
@@ -87,7 +93,9 @@ def load_submission(submission_dir: Path, entrypoint: str) -> ModuleType | DataS
     added = str(submission_dir.resolve())
     sys.path.insert(0, added)
     try:
-        return import_from_path(target, f"_submission_{submission_dir.name}_{Path(entrypoint).stem}")
+        return import_from_path(
+            target, f"_submission_{submission_dir.name}_{Path(entrypoint).stem}"
+        )
     finally:
         if sys.path and sys.path[0] == added:
             sys.path.pop(0)

@@ -38,7 +38,9 @@ def collect(report: dict) -> dict[str, dict]:
         match = ID_RE.search(test["nodeid"])
         if not match:
             continue
-        crash = (test.get("call") or {}).get("crash") or (test.get("setup") or {}).get("crash") or {}
+        crash = (
+            (test.get("call") or {}).get("crash") or (test.get("setup") or {}).get("crash") or {}
+        )
         results[match["name"]] = {
             "passed": test["outcome"] == "passed",
             "error": (crash.get("message") or "").strip(),
@@ -74,6 +76,7 @@ def render(module: str, handle: str, results: dict[str, dict]) -> str:
             f"Fix that and push again - the check reruns on its own. "
             f"See [the task]({task_link(module)}) for where the file belongs.",
         ]
+        VERDICT.update(ok=False, reason="the submission could not be loaded")
         return "\n".join(lines)
 
     core = [c for c in suite.checks if c.tier != STRETCH]
@@ -93,7 +96,9 @@ def render(module: str, handle: str, results: dict[str, dict]) -> str:
         ok=core_passed == len(core),
         core_passed=core_passed,
         core_total=len(core),
-        reason="" if core_passed == len(core) else f"{len(core) - core_passed} core check(s) still failing",
+        reason=""
+        if core_passed == len(core)
+        else f"{len(core) - core_passed} core check(s) still failing",
     )
     if stretch:
         headline += f" Stretch: {stretch_passed} of {len(stretch)}."
@@ -113,7 +118,13 @@ def render(module: str, handle: str, results: dict[str, dict]) -> str:
     if failed:
         lines += ["<details>", f"<summary>What went wrong ({len(failed)})</summary>", ""]
         for check in failed:
-            lines += [f"**{check.name}**", "", "```", results.get(check.name, {}).get("error", "did not run"), "```"]
+            lines += [
+                f"**{check.name}**",
+                "",
+                "```",
+                results.get(check.name, {}).get("error", "did not run"),
+                "```",
+            ]
             if check.hint:
                 lines += ["", f"> Nudge: {check.hint}"]
             lines.append("")
@@ -123,7 +134,11 @@ def render(module: str, handle: str, results: dict[str, dict]) -> str:
         "---",
         f"[The task]({task_link(module)}) &middot; "
         f"[the checks, in full]({checks_link(module)})"
-        + (f" &middot; [practise in your browser]({SITE_URL}playground.html?module={module})" if SITE_URL else ""),
+        + (
+            f" &middot; [practise in your browser]({SITE_URL}playground.html?module={module})"
+            if SITE_URL
+            else ""
+        ),
     ]
     return "\n".join(lines)
 
@@ -156,7 +171,9 @@ def main() -> int:
 
     global BASE_URL, SITE_URL
     BASE_URL = args.repo_url.rstrip("/")
-    SITE_URL = args.site_url if not args.site_url or args.site_url.endswith("/") else args.site_url + "/"
+    SITE_URL = (
+        args.site_url if not args.site_url or args.site_url.endswith("/") else args.site_url + "/"
+    )
 
     targets = json.loads(args.targets.read_text(encoding="utf-8"))
 
@@ -175,7 +192,9 @@ def main() -> int:
     target = targets["targets"][0]
     if not args.report or not args.report.is_file():
         return finish(
-            render_guard("The checks did not produce a report. Ping a maintainer - this one is on us."),
+            render_guard(
+                "The checks did not produce a report. Ping a maintainer - this one is on us."
+            ),
             False,
             "the checks did not run",
         )

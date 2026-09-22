@@ -216,9 +216,13 @@ SUITE = CheckSuite(
         ),
         Check("Sequential applies its layers in order", sequential_applies_layers_in_order, CORE),
         Check(
-            "Sequential collects the parameters of every layer", sequential_collects_parameters, CORE
+            "Sequential collects the parameters of every layer",
+            sequential_collects_parameters,
+            CORE,
         ),
-        Check("A layer with no weights reports no parameters", activations_have_no_parameters, CORE),
+        Check(
+            "A layer with no weights reports no parameters", activations_have_no_parameters, CORE
+        ),
         Check(
             "Sequential supports len() and indexing",
             sequential_supports_len_and_indexing,
@@ -233,10 +237,17 @@ SUITE = CheckSuite(
             hint="one __repr__ on the base class covers every activation",
         ),
         Check("repr(Sequential) lists the layers it holds", sequential_repr_lists_its_layers, CORE),
-        Check("num_parameters counts every weight and bias", num_parameters_counts_every_scalar, CORE),
+        Check(
+            "num_parameters counts every weight and bias", num_parameters_counts_every_scalar, CORE
+        ),
         Check("Tanh matches np.tanh", tanh_matches_numpy, STRETCH),
         Check("LayerNorm normalises the last axis", layernorm_normalises_the_last_axis, STRETCH),
         Check("LayerNorm exposes gamma and beta", layernorm_exposes_gamma_and_beta, STRETCH),
-        Check("Iterating a Sequential yields its layers", sequential_is_iterable, STRETCH, hint="__iter__"),
+        Check(
+            "Iterating a Sequential yields its layers",
+            sequential_is_iterable,
+            STRETCH,
+            hint="__iter__",
+        ),
     ],
 )
