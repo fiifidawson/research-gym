@@ -1,0 +1,19 @@
+# Never commit the skills survey - it holds real names and self-assessments.
+*.xlsx
+*.xls
+*.csv
+
+# Generated for the browser playground by .github/scripts/build_browser_bundle.py
+docs/_browser/
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.report.json
+runs/
+.DS_Store
+.vscode/
+.idea/

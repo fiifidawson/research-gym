@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>research-gym</title>
+<meta name="description" content="A shared repo for getting a team good at AI research and engineering, one reviewed pull request at a time.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>&#127947;</text></svg>">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="./">research<span>-</span>gym</a>
+    <nav class="site">
+      <a href="./" aria-current="page">Home</a>
+      <a href="playground.html">Playground</a>
+      <a href="reading.html">Reading</a>
+      <a id="repo-link" href="#">Repo</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <h1 id="tagline">Reps until AI research and engineering feel ordinary.</h1>
+    <p>
+      Every module is a small piece of a neural network you build yourself, submitted as a pull
+      request, checked by a robot and reviewed by a human. You never have to run a test on your own
+      machine &mdash; opening the pull request <em>is</em> running the tests.
+    </p>
+  </div>
+
+  <section id="start">
+    <h2>Start here</h2>
+    <p class="lede">Fifteen minutes, and you will have done the whole loop once.</p>
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>Claim your corner</strong>
+          <p>Make a branch called <code>your-handle/00-onboarding</code> and add
+          <code>submissions/your-handle/00-onboarding/profile.json</code>. Copy the starter and fill it in.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Open a pull request</strong>
+          <p>A check runs by itself and leaves a comment listing, in plain English, what passed and
+          what did not. Push again and the same comment updates. Nothing to install.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Get it reviewed, then merge</strong>
+          <p>One teammate reads it and approves. Your row appears below. Then take module 01, and
+          from there the neural network starts.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="progress">
+    <h2>Where everyone is</h2>
+    <p class="lede">Rebuilt from scratch after every merge, by re-running each merged submission
+    against the current checks &mdash; so this table cannot quietly go stale.</p>
+    <div class="table-scroll">
+      <table class="board" id="board"><tbody><tr><td class="empty">Loading&hellip;</td></tr></tbody></table>
+    </div>
+    <div class="legend">
+      <span><i class="pip complete">&#10003;</i> core checks pass</span>
+      <span><i class="pip stretch">&#9733;</i> stretch too</span>
+      <span><i class="pip partial">&#9679;</i> in progress</span>
+      <span><i class="pip">&middot;</i> not started</span>
+    </div>
+  </section>
+
+  <section id="track">
+    <h2>The track</h2>
+    <p class="lede">
+      Fundamentals first, in NumPy, so nothing is magic. Then the same things in PyTorch. Then an LLM,
+      following <a id="book-link" href="https://sebastianraschka.com/llms-from-scratch/">Sebastian
+      Raschka's <em>Build a Large Language Model (From Scratch)</em></a> chapter by chapter. Then the
+      part that makes it research rather than tutorials.
+    </p>
+    <div id="phases"></div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>Built by the people in it. Add a reading, fix a check, improve a task &mdash; all of it is a pull request.</span>
+    <span id="generated"></span>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

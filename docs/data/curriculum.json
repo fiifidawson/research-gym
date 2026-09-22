@@ -1,0 +1,228 @@
+{
+  "title": "research-gym",
+  "repo": "https://github.com/REPLACE-ME/research-gym",
+  "tagline": "Reps until AI research and engineering feel ordinary.",
+  "book": {
+    "title": "Build a Large Language Model (From Scratch)",
+    "author": "Sebastian Raschka",
+    "url": "https://sebastianraschka.com/llms-from-scratch/"
+  },
+  "phases": [
+    {
+      "id": "onboarding",
+      "name": "Onboarding",
+      "blurb": "Open a pull request, get it reviewed, get it merged. Nothing else."
+    },
+    {
+      "id": "fundamentals",
+      "name": "Fundamentals",
+      "blurb": "Object-oriented Python, taught entirely by building a neural network out of NumPy."
+    },
+    {
+      "id": "pytorch",
+      "name": "PyTorch and experiments",
+      "blurb": "The same model in a real framework, then the habits that make a result trustworthy."
+    },
+    {
+      "id": "llm",
+      "name": "An LLM from scratch",
+      "blurb": "Raschka's book, chapter by chapter: tokenizer, attention, GPT, pretraining, fine-tuning."
+    },
+    {
+      "id": "research",
+      "name": "Research craft",
+      "blurb": "Reproduce something, evaluate it honestly, write it up, then push past the book."
+    }
+  ],
+  "modules": [
+    {
+      "id": "00-onboarding",
+      "title": "Onboarding",
+      "phase": "onboarding",
+      "status": "ready",
+      "browser": false,
+      "entrypoint": "profile.json",
+      "summary": "Introduce yourself in a pull request and watch the whole loop run once.",
+      "teaches": [
+        "branches",
+        "pull requests",
+        "code review"
+      ]
+    },
+    {
+      "id": "01-oop-refresher",
+      "title": "OOP refresher",
+      "phase": "fundamentals",
+      "status": "ready",
+      "browser": true,
+      "entrypoint": "nn.py",
+      "summary": "Build Layer, Linear, ReLU and Sequential in NumPy. Forward pass only.",
+      "teaches": [
+        "abstract base classes",
+        "__call__ and __repr__",
+        "composition",
+        "seeding"
+      ]
+    },
+    {
+      "id": "02-autograd",
+      "title": "Autograd from scratch",
+      "phase": "fundamentals",
+      "status": "planned",
+      "browser": true,
+      "entrypoint": "autograd.py",
+      "summary": "A scalar Value that remembers how it was made, and a backward() that walks it.",
+      "teaches": [
+        "operator overloading",
+        "topological sort",
+        "the chain rule, concretely"
+      ]
+    },
+    {
+      "id": "03-training-loop",
+      "title": "The training loop",
+      "phase": "fundamentals",
+      "status": "planned",
+      "browser": true,
+      "entrypoint": "train.py",
+      "summary": "Dataset, DataLoader, SGD and Trainer. Fit an MLP to two moons and watch the loss fall.",
+      "teaches": [
+        "iterators",
+        "dataclass configs",
+        "frozen seeds"
+      ]
+    },
+    {
+      "id": "04-pytorch-port",
+      "title": "Port it to PyTorch",
+      "phase": "pytorch",
+      "status": "planned",
+      "browser": false,
+      "entrypoint": "model.py",
+      "summary": "The same MLP as an nn.Module. The check asserts it matches your module 03 result.",
+      "teaches": [
+        "nn.Module",
+        "tensors and devices",
+        "autograd you did not write"
+      ]
+    },
+    {
+      "id": "05-reproducible-experiments",
+      "title": "Experiments you can trust",
+      "phase": "pytorch",
+      "status": "planned",
+      "browser": false,
+      "entrypoint": "experiment.py",
+      "summary": "A config file, a seeded run directory, a metrics.json, a results table and one ablation.",
+      "teaches": [
+        "configs",
+        "run directories",
+        "ablations",
+        "reading your own results"
+      ]
+    },
+    {
+      "id": "06-tokenizer-and-embeddings",
+      "title": "Tokenizer and embeddings",
+      "phase": "llm",
+      "status": "planned",
+      "browser": false,
+      "entrypoint": "tokenizer.py",
+      "summary": "Byte-pair encoding, a vocabulary, and the embedding table it feeds.",
+      "book_chapter": 2
+    },
+    {
+      "id": "07-attention",
+      "title": "Attention",
+      "phase": "llm",
+      "status": "planned",
+      "browser": false,
+      "entrypoint": "attention.py",
+      "summary": "Self-attention, then causal masking, then multiple heads.",
+      "book_chapter": 3
+    },
+    {
+      "id": "08-gpt-architecture",
+      "title": "A GPT, assembled",
+      "phase": "llm",
+      "status": "planned",
+      "browser": false,
+      "entrypoint": "gpt.py",
+      "summary": "Blocks, residuals, LayerNorm and a head. Your module 01 Sequential, grown up.",
+      "book_chapter": 4
+    },
+    {
+      "id": "09-pretraining",
+      "title": "Pretraining",
+      "phase": "llm",
+      "status": "planned",
+      "browser": false,
+      "entrypoint": "pretrain.py",
+      "summary": "A real training loop on real text, with checkpoints and sampling.",
+      "book_chapter": 5
+    },
+    {
+      "id": "10-finetune-classification",
+      "title": "Fine-tuning to classify",
+      "phase": "llm",
+      "status": "planned",
+      "browser": false,
+      "entrypoint": "finetune.py",
+      "summary": "Swap the head, freeze what you can, and beat a baseline you chose in advance.",
+      "book_chapter": 6
+    },
+    {
+      "id": "11-instruction-tuning",
+      "title": "Instruction tuning",
+      "phase": "llm",
+      "status": "planned",
+      "browser": false,
+      "entrypoint": "instruct.py",
+      "summary": "Format, train, and then judge the output without fooling yourself.",
+      "book_chapter": 7
+    },
+    {
+      "id": "12-reproduce-a-result",
+      "title": "Reproduce a result",
+      "phase": "research",
+      "status": "planned",
+      "browser": false,
+      "entrypoint": "reproduce.py",
+      "summary": "Pick a small published result. Get within error bars. Document every place you could not.",
+      "teaches": [
+        "reading a paper for its method",
+        "scoping",
+        "negative results"
+      ]
+    },
+    {
+      "id": "13-evaluation-and-error-analysis",
+      "title": "Evaluation and error analysis",
+      "phase": "research",
+      "status": "planned",
+      "browser": false,
+      "entrypoint": "evaluate.py",
+      "summary": "Baselines, ablations, and fifty failure cases read by hand. Ends in a short written report.",
+      "teaches": [
+        "baselines",
+        "ablations",
+        "failure taxonomies",
+        "writing it up"
+      ]
+    },
+    {
+      "id": "14-post-training",
+      "title": "Post-training",
+      "phase": "research",
+      "status": "planned",
+      "browser": false,
+      "entrypoint": "post_training.py",
+      "summary": "LoRA, then DPO, then GRPO. The first one you will implement; the others you will run and read.",
+      "teaches": [
+        "parameter-efficient fine-tuning",
+        "preference optimisation",
+        "RL on language models"
+      ]
+    }
+  ]
+}

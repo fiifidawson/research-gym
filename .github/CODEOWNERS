@@ -1,0 +1,15 @@
+# Who gets asked for a review, automatically.
+#
+# The reviewers team starts with the people who told the skills survey they could
+# already review someone else's code. You join it after module 05 - reviewing is
+# the promotion, and it is meant to be.
+#
+# Replace the team with real handles (or a @org/team) before the first pull request.
+
+submissions/          @REPLACE-ME/reviewers
+
+# The machinery needs a closer look, because breaking it blocks everybody.
+modules/*/checks.py   @REPLACE-ME/maintainers
+modules/*/tests/      @REPLACE-ME/maintainers
+.github/              @REPLACE-ME/maintainers
+gym/                  @REPLACE-ME/maintainers

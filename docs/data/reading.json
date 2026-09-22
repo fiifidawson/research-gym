@@ -1,0 +1,118 @@
+{
+  "items": [
+    {
+      "module": "general",
+      "title": "Build a Large Language Model (From Scratch)",
+      "url": "https://sebastianraschka.com/llms-from-scratch/",
+      "source": "Sebastian Raschka",
+      "kind": "book",
+      "why": "The spine of phase 3. Worth owning rather than skimming."
+    },
+    {
+      "module": "general",
+      "title": "How to write a good pull request description",
+      "url": "https://www.pullrequest.com/blog/writing-a-great-pull-request-description/",
+      "source": "PullRequest",
+      "kind": "article",
+      "minutes": 6,
+      "why": "The template asks you four questions. This is why they are those four."
+    },
+    {
+      "module": "00-onboarding",
+      "title": "Understanding the GitHub flow",
+      "url": "https://docs.github.com/en/get-started/using-github/github-flow",
+      "source": "GitHub Docs",
+      "kind": "guide",
+      "minutes": 5,
+      "why": "Branch, commit, pull request, review, merge. The whole loop on one page."
+    },
+    {
+      "module": "00-onboarding",
+      "title": "Editing files in the browser with github.dev",
+      "url": "https://docs.github.com/en/codespaces/the-githubdev-web-based-editor",
+      "source": "GitHub Docs",
+      "kind": "guide",
+      "minutes": 4,
+      "why": "Press . on any repo page. No terminal, no clone, no setup."
+    },
+    {
+      "module": "01-oop-refresher",
+      "title": "The Python data model",
+      "url": "https://docs.python.org/3/reference/datamodel.html#special-method-names",
+      "source": "Python docs",
+      "kind": "reference",
+      "why": "__call__, __repr__, __len__, __getitem__ - module 01 is mostly this page, applied."
+    },
+    {
+      "module": "01-oop-refresher",
+      "title": "abc - abstract base classes",
+      "url": "https://docs.python.org/3/library/abc.html",
+      "source": "Python docs",
+      "kind": "reference",
+      "minutes": 8,
+      "why": "Why Layer() should refuse to be instantiated."
+    },
+    {
+      "module": "01-oop-refresher",
+      "title": "NumPy: broadcasting",
+      "url": "https://numpy.org/doc/stable/user/basics.broadcasting.html",
+      "source": "NumPy",
+      "kind": "guide",
+      "minutes": 10,
+      "why": "Why `x @ W + b` works when b has one dimension and x has two."
+    },
+    {
+      "module": "01-oop-refresher",
+      "title": "Random generators, not np.random.seed",
+      "url": "https://numpy.org/doc/stable/reference/random/generator.html",
+      "source": "NumPy",
+      "kind": "reference",
+      "minutes": 7,
+      "why": "A global seed is a shared mutable variable. default_rng is the fix."
+    },
+    {
+      "module": "02-autograd",
+      "title": "The spelled-out intro to neural networks and backpropagation",
+      "url": "https://www.youtube.com/watch?v=VMj-3S1tku0",
+      "source": "Andrej Karpathy",
+      "kind": "video",
+      "minutes": 145,
+      "why": "Module 02 is this video, done yourself. Watch it once before you start."
+    },
+    {
+      "module": "02-autograd",
+      "title": "micrograd",
+      "url": "https://github.com/karpathy/micrograd",
+      "source": "Andrej Karpathy",
+      "kind": "code",
+      "why": "150 lines. Read it after you have written your own, not before."
+    },
+    {
+      "module": "03-training-loop",
+      "title": "Why momentum really works",
+      "url": "https://distill.pub/2017/momentum/",
+      "source": "Distill",
+      "kind": "article",
+      "minutes": 25,
+      "why": "The clearest thing ever written about what an optimiser is doing."
+    },
+    {
+      "module": "05-reproducible-experiments",
+      "title": "A recipe for training neural networks",
+      "url": "https://karpathy.github.io/2019/04/25/recipe/",
+      "source": "Andrej Karpathy",
+      "kind": "article",
+      "minutes": 20,
+      "why": "Read this the week you start module 05, and again a year from now."
+    },
+    {
+      "module": "13-evaluation-and-error-analysis",
+      "title": "The ML Test Score",
+      "url": "https://research.google/pubs/pub46555/",
+      "source": "Google Research",
+      "kind": "paper",
+      "minutes": 30,
+      "why": "A checklist for whether a result is trustworthy yet."
+    }
+  ]
+}

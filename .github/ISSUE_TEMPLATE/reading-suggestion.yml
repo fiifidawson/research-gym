@@ -1,0 +1,29 @@
+name: Suggest a reading
+description: Something worth other people's time.
+title: "[reading] "
+labels: ["reading"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You can skip this form entirely and just add it to `docs/data/reading.json`
+        in a pull request - it's one line and it's the smallest useful contribution
+        anyone can make. Use this issue if you'd rather someone else did the JSON.
+  - type: input
+    id: url
+    attributes:
+      label: Link
+    validations:
+      required: true
+  - type: input
+    id: module
+    attributes:
+      label: Which module it helps with
+      placeholder: 02-autograd, or "general"
+  - type: textarea
+    id: why
+    attributes:
+      label: What it's good for
+      description: Not what it's about - what it's good *for*, and who should read it.
+    validations:
+      required: true

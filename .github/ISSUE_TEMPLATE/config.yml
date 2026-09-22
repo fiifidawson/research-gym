@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: How to contribute
+    url: https://github.com/REPLACE-ME/research-gym/blob/main/CONTRIBUTING.md
+    about: The three-step flow, the house rules, and how to give a useful review.
+  - name: Start here
+    url: https://github.com/REPLACE-ME/research-gym/blob/main/modules/00-onboarding/TASK.md
+    about: New? Module 00 takes ten minutes and walks you through the whole loop.

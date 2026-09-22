@@ -1,0 +1,34 @@
+name: I'm stuck on a module
+description: Ask for help. Writing it down solves it about a third of the time.
+title: "[help] "
+labels: ["help wanted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Getting stuck is not a status report on your ability. Everyone here put
+        "Intermediate" next to something.
+  - type: input
+    id: module
+    attributes:
+      label: Which module
+      placeholder: 01-oop-refresher
+    validations:
+      required: true
+  - type: input
+    id: check
+    attributes:
+      label: Which check, if it's one in particular
+      description: Copy the name from the comment on your pull request.
+      placeholder: repr(Sequential) lists the layers it holds
+  - type: textarea
+    id: tried
+    attributes:
+      label: What you have tried
+      description: Code is welcome. So is "I don't know where to start" - that is a real answer.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected to happen, and what happened instead

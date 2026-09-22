@@ -1,0 +1,29 @@
+name: Something in the repo is wrong
+description: A check that seems incorrect, a broken link, a task that contradicts itself.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Checks are code and code has bugs. Finding one is a genuine contribution -
+        thank you for not just working around it.
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      placeholder: modules/01-oop-refresher/checks.py, "Linear keeps the batch dimension"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected, and what you got
+      description: If it's a check, paste the failure message from your pull request.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: What you think it should do instead
+      description: Optional. Happy to take a pull request too - it just needs to be its own.

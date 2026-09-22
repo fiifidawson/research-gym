@@ -1,0 +1,88 @@
+name: Submission check
+
+# This is the only test runner in the repo. Nobody is expected to run pytest on
+# their own machine; they push, and this writes back in English.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # resolve_targets.py diffs against the base commit
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: pip install --quiet -e ".[checks]"
+
+      - name: Work out what this pull request submits
+        id: targets
+        run: |
+          python .github/scripts/resolve_targets.py \
+            --base "${{ github.event.pull_request.base.sha }}" \
+            --head "${{ github.event.pull_request.head.sha }}" \
+            --author "${{ github.event.pull_request.user.login }}" \
+            --out targets.json
+          echo "module=$(jq -r '.targets[0].module // ""' targets.json)" >> "$GITHUB_OUTPUT"
+          echo "path=$(jq -r '.targets[0].path // ""' targets.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Run the checks
+        if: steps.targets.outputs.module != ''
+        continue-on-error: true # a failing check is the normal case, not an error
+        env:
+          SUBMISSION_DIR: ${{ steps.targets.outputs.path }}
+        run: |
+          pytest "modules/${{ steps.targets.outputs.module }}/tests" \
+            --json-report --json-report-file=report.json -q
+
+      - name: Write the comment
+        run: |
+          python .github/scripts/render_report.py \
+            --targets targets.json \
+            --report report.json \
+            --out comment.md \
+            --verdict verdict.json \
+            --repo-url "${{ github.server_url }}/${{ github.repository }}" \
+            --site-url "${{ vars.SITE_URL }}"
+
+      - name: Post it, replacing the previous one
+        if: hashFiles('comment.md') != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          [ -s comment.md ] || exit 0
+          existing=$(gh api "repos/${{ github.repository }}/issues/$PR/comments" \
+            --jq '.[] | select(.body | contains("<!-- research-gym-report -->")) | .id' | head -1)
+          if [ -n "$existing" ]; then
+            gh api -X PATCH "repos/${{ github.repository }}/issues/comments/$existing" -F body=@comment.md
+          else
+            gh api -X POST "repos/${{ github.repository }}/issues/$PR/comments" -F body=@comment.md
+          fi
+
+      - name: Summarise
+        run: cat comment.md >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Pass or fail the pull request
+        run: |
+          if [ "$(jq -r '.ok' verdict.json)" != "true" ]; then
+            echo "::error::$(jq -r '.reason' verdict.json) - see the comment on the pull request"
+            exit 1
+          fi
+          echo "All core checks pass."
