@@ -4,7 +4,8 @@
   <em>Reps until AI research and engineering feel ordinary.</em><br>
   <a href="modules/00-onboarding/TASK.md">Start here</a> &middot;
   <a href="CONTRIBUTING.md">How to contribute</a> &middot;
-  <a href="docs/index.html">The dashboard</a>
+  <a href="docs/index.html">The dashboard</a> &middot;
+  <a href="SETUP.md">Setting it up</a>
 </p>
 
 ---
