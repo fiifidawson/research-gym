@@ -10,6 +10,7 @@ up by name, and module 02 imports this file.
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+
 import numpy as np
 
 # =============================================================================
@@ -141,15 +142,13 @@ class Sequential(Layer):
 
     def __getitem__(self, index: int) -> Layer:
         # TODO: model[0]
-        raise self.layers[index]
+        return self.layers[index]
 
     def __repr__(self) -> str:
         # TODO: exactly
         # `Sequential(Linear(in_features=2, out_features=4), ReLU(), Linear(in_features=4, out_features=1))`
         # Reuse the children's repr rather than rebuilding their text.
-        return f"{self.__class__.__name__}({", ".join(
-            [str(layer) for layer in self.layers]
-        )})"
+        return f"{self.__class__.__name__}({", ".join([str(layer) for layer in self.layers])})"
 
 
 # =============================================================================
