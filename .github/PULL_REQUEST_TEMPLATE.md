@@ -1,3 +1,9 @@
+<!-- Pick ONE section below, fill it in, and delete the other.
+     A. Submitting a module solution (learners)
+     B. Contributing content or fixes (modules, features, docs) -->
+
+## A. Module submission
+
 <!-- Module: which one? e.g. 01-oop-refresher -->
 
 **Module:**
@@ -23,9 +29,29 @@
 <!-- With hindsight, knowing what you know now having finished. This is the habit that
      turns exercises into research. -->
 
----
-
 - [ ] My work is only inside `submissions/<my-handle>/`
 - [ ] One module in this pull request
 - [ ] I have read the check's comment below and the core checks are green
 - [ ] I have reviewed, or am about to review, someone else's pull request
+
+---
+
+## B. Contribution
+
+### What this adds
+
+<!-- What you are contributing: new module, feature, bug fix, documentation, etc. -->
+
+### Why it matters
+
+<!-- The problem this solves or what it enables. -->
+
+### Changes made
+
+<!-- Files created or modified, with a one-line summary of each. -->
+
+- [ ] Follows existing patterns in the repo
+- [ ] Scope is focused, with no unrelated changes
+- [ ] No breaking changes to existing modules
+- [ ] Tests and checks pass, if applicable
+- [ ] Docs updated, if needed
