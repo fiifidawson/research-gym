@@ -1,0 +1,10 @@
+{
+  "handle": "tourad009",
+  "name": "Tourad Aidara",
+  "role": "Software engineering graduate, aiming at AI research",
+  "track": "ml-and-experiments",
+  "here_for": "I want to be able to design and run my own ML research experiments end to end, and to become a stronger engineer by building the core pieces (autograd, a training loop, attention) from scratch.",
+  "links": {
+    "github": "https://github.com/tourad009"
+  }
+}
