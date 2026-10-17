@@ -204,11 +204,10 @@ class LayerNorm(Layer):
 
 
 # TODO (stretch): give Sequential an `__iter__` so `for layer in model:` works.
-class Sequential(Sequential):
+def __iter__(self,):
+    yield from  self.layers
 
-    def __iter__(self,):
-        for layer in self.layers:
-            yield layer
+Sequential.__iter__ = __iter__
 
 if __name__ == "__main__":
     # Scratch space. Nothing here is checked.
