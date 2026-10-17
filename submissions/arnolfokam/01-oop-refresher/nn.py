@@ -41,7 +41,7 @@ class Layer(ABC):
     def parameters(self) -> list[np.ndarray]:
         return []
 
-    def __repr__(self,):
+    def __repr__(self):
         return f"{self.__class__.__name__}()"
 
     @abstractmethod
@@ -195,7 +195,7 @@ class LayerNorm(Layer):
     def parameters(self) -> list[np.ndarray]:
         return [self.gamma, self.beta]
 
-    def __repr__(self,):
+    def __repr__(self):
         return f"{self.__class__.__name__}(dim={self.dim}, eps={self.eps})"
 
     def forward(self, x: np.ndarray) -> np.ndarray:
@@ -204,7 +204,7 @@ class LayerNorm(Layer):
 
 
 # TODO (stretch): give Sequential an `__iter__` so `for layer in model:` works.
-def __iter__(self,):
+def __iter__(self):
     yield from  self.layers
 
 Sequential.__iter__ = __iter__
