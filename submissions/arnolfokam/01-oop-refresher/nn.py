@@ -204,7 +204,9 @@ class LayerNorm(Layer):
 
 
 # TODO (stretch): give Sequential an `__iter__` so `for layer in model:` works.
-def __iter__(self):
+from collections import Iterator
+
+def __iter__(self) -> Iterator[Layer]:
     yield from  self.layers
 
 Sequential.__iter__ = __iter__
