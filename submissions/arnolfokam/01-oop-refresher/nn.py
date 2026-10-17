@@ -186,7 +186,7 @@ class LayerNorm(Layer):
     return both from `parameters()`, and compute
     `gamma * (x - mean) / sqrt(var + eps) + beta` over the last axis.
     """
-    def __init__(self, dim: int, eps: float | None = 0.01) -> None:
+    def __init__(self, dim: int, eps: float | None = 1e-5) -> None:
         self.dim = dim
         self.eps = eps
         self.gamma = np.ones(dim)
