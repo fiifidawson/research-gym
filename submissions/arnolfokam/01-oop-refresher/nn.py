@@ -9,8 +9,8 @@ up by name, and module 02 imports this file.
 
 from __future__ import annotations
 
-from collections import Iterator
 from abc import ABC, abstractmethod
+from collections.abc import Iterator
 
 import numpy as np
 
