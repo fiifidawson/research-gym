@@ -9,6 +9,7 @@ up by name, and module 02 imports this file.
 
 from __future__ import annotations
 
+from collections import Iterator
 from abc import ABC, abstractmethod
 
 import numpy as np
@@ -204,8 +205,6 @@ class LayerNorm(Layer):
 
 
 # TODO (stretch): give Sequential an `__iter__` so `for layer in model:` works.
-from collections import Iterator
-
 def __iter__(self) -> Iterator[Layer]:
     yield from  self.layers
 
