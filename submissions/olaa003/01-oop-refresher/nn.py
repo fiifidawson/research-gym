@@ -109,7 +109,7 @@ class Sequential(Layer):
 
     def forward(self, x: np.ndarray) -> np.ndarray:
         for layer in self.layers:
-        x = layer.forward(x)
+            x = layer.forward(x)
         return x
 
     def parameters(self) -> list[np.ndarray]:
