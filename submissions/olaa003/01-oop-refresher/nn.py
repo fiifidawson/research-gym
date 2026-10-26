@@ -20,7 +20,8 @@ class Layer(ABC):
     """Anything that turns an array into another array."""
 
     @abstractmethod
-    def forward(self, x):
+    def forward(self, x: np.ndarray) -> np.ndarray:
+        """Run this layer on a batch of inputs, shape (batch, features)."""
         ...
 
     def __call__(self, x):
@@ -31,11 +32,6 @@ class Layer(ABC):
 
     def __repr__(self):
         return f"{self.__class__.__name__} + ()"
-
-
-    def forward(self, x: np.ndarray) -> np.ndarray:
-        """Run this layer on a batch of inputs, shape (batch, features)."""
-        raise NotImplementedError
 
 
 # =============================================================================
