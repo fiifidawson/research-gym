@@ -21,7 +21,7 @@ class Value:
     This lets backward() walk backward through the graph and apply the chain rule.
     """
 
-    def __init__(self, data, _children=(), _op=''):
+    def __init__(self, data, _children=(), _op=""):
         """Initialize a Value.
 
         Args:

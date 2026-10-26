@@ -50,9 +50,7 @@ def addition_creates_graph_structure(m):
     c = a + b
 
     if not ((c._children == (a, b)) or (c._children == (b, a))):
-        raise AssertionError(
-            f"c._children should be (a, b) or (b, a), got {c._children}"
-        )
+        raise AssertionError(f"c._children should be (a, b) or (b, a), got {c._children}")
 
     assert_equal(c._op, "add", "c._op after addition")
 
@@ -74,9 +72,7 @@ def multiplication_creates_graph_structure(m):
     c = a * b
 
     if not ((c._children == (a, b)) or (c._children == (b, a))):
-        raise AssertionError(
-            f"c._children should be (a, b) or (b, a), got {c._children}"
-        )
+        raise AssertionError(f"c._children should be (a, b) or (b, a), got {c._children}")
 
     assert_equal(c._op, "mul", "c._op after multiplication")
 
@@ -149,7 +145,7 @@ def value_supports_power_operation(m):
     """Check: Value(3) ** 2 = 9."""
     Value = _value(m)
     v = Value(3)
-    result = v ** 2
+    result = v**2
     assert_close(result.data, 9.0, "Value(3) ** 2")
 
 
@@ -157,7 +153,7 @@ def backward_computes_power_gradient(m):
     """Check: y = x**2; y.backward() gives x.grad = 2*x."""
     Value = _value(m)
     x = Value(3)
-    y = x ** 2
+    y = x**2
     y.backward()
 
     assert_close(x.grad, 6.0, "gradient of x^2 at x=3 is 2*3=6")
@@ -209,9 +205,7 @@ def repr_shows_data_and_gradient(m):
     repr_str = repr(v)
 
     if "5" not in repr_str or "2" not in repr_str:
-        raise AssertionError(
-            f"repr should show data and grad, got: {repr_str}"
-        )
+        raise AssertionError(f"repr should show data and grad, got: {repr_str}")
 
 
 # --- stretch checks --------------------------------------------------------------
@@ -227,10 +221,10 @@ def backward_gradients_match_finite_differences(m):
         return (f(x_plus).data - f(x_minus).data) / (2 * eps)
 
     x = Value(3.0)
-    y = x ** 2
+    y = x**2
     y.backward()
 
-    num_grad = numerical_grad(lambda v: v ** 2, x)
+    num_grad = numerical_grad(lambda v: v**2, x)
     assert_close(x.grad, num_grad, "analytic vs numeric gradient", tol=1e-4)
 
 
