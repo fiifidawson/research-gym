@@ -8,7 +8,7 @@ up by name, and module 02 imports this file.
 """
 
 from __future__ import annotations
-from abc import ABC
+from abc import ABC, abstractmethod
 import numpy as np
 
 # =============================================================================
@@ -17,7 +17,7 @@ import numpy as np
 
 
 class Layer(ABC):
-    """Anything that turns an array into another array.
+    """Anything that turns an array into another array."""
 
     @abstractmethod
     def forward(self, x):
@@ -44,7 +44,8 @@ class Layer(ABC):
 
 
 class Linear(Layer):
-    """The affine map `x @ W + b`.
+    """
+    The affine map `x @ W + b`.
 
     Args:
         in_features: Size of each input row.
@@ -82,7 +83,7 @@ class ReLU(Layer):
     """Zero out negatives, keep everything else."""
 
     def forward(self, x: np.ndarray) -> np.ndarray:
-        return return np.maximum(0, x)
+        return np.maximum(0, x)
  
     def __repr__(self) -> str:
         return "ReLU()"
@@ -95,20 +96,21 @@ class ReLU(Layer):
 
 class Sequential(Layer):
     """Runs the layers it holds, front to back.
-
+    
     A Sequential is a Layer and contains Layers. That is how every framework
     composes a model, and how you'll assemble a transformer block in module 08.
     """
 
     def __init__(self, *layers: Layer) -> None:
-        super.__init__()
+        super().__init__()
         for i, layer in enumerate(layers):
     setattr(self, f"layer_{i}", layer)
+        self.layers = list(layers)
 
     def forward(self, x: np.ndarray) -> np.ndarray:
         for layer in self.layers:
         x = layer.forward(x)
-    return x
+        return x
 
     def parameters(self) -> list[np.ndarray]:
         return [param for layer in self.layers for param in layer.parameters()]
@@ -117,14 +119,14 @@ class Sequential(Layer):
         return len(self.layers)
 
     def __getitem__(self, index: int) -> Layer:
-        return self.layers[idx]
+        return self.layers[index]
 
     def __iter__(self):
         return iter(self.layers)  
 
     def __repr__(self) -> str:
         layers_repr = ", ".join(repr(layer) for layer in self.layers)
-    return f"Sequential({layers_repr})"
+        return f"Sequential({layers_repr})"
 
 
 # =============================================================================
@@ -133,7 +135,7 @@ class Sequential(Layer):
 
 
 def num_parameters(layer: Layer) -> int:
-    """Total number of individual values a layer is holding.
+    """Total number of individual values a layer is holding."""
     return sum(param.size for param in layer.parameters())
 
 
@@ -176,7 +178,7 @@ class LayerNorm(Layer):
     def forward(self, x: np.ndarray) -> np.ndarray:
         mean = x.mean(axis=-1, keepdims=True)
         var = x.var(axis=-1, keepdims=True)
-        return self.gamma * (x - mean) / sqrt(var + self.eps) + self.beta
+        return self.gamma * (x - mean) / np.sqrt(var + self.eps) + self.beta
 
     def parameters(self) -> list[np.ndarray]:
         return [self.gamma, self.beta]
