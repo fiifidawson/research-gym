@@ -104,7 +104,7 @@ class Sequential(Layer):
     def __init__(self, *layers: Layer) -> None:
         super().__init__()
         for i, layer in enumerate(layers):
-    setattr(self, f"layer_{i}", layer)
+            setattr(self, f"layer_{i}", layer)
         self.layers = list(layers)
 
     def forward(self, x: np.ndarray) -> np.ndarray:
