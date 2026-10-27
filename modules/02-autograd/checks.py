@@ -287,13 +287,13 @@ SUITE = CheckSuite(
             "Backward computes correct gradients for addition",
             backward_computes_gradients_for_addition,
             CORE,
-            hint="In _backward for add: both children get gradient 1.0 from parent",
+            hint="out.grad reaches each child unchanged - work out why from d(a+b)/da",
         ),
         Check(
             "Backward computes correct gradients for multiplication",
             backward_computes_gradients_for_multiplication,
             CORE,
-            hint="In _backward for mul: child a gets b's value, child b gets a's value",
+            hint="each child's local derivative is the other child's data, not 1",
         ),
         Check(
             "Gradients accumulate when a node appears multiple times",
@@ -323,7 +323,7 @@ SUITE = CheckSuite(
             "Value supports power operation",
             value_supports_power_operation,
             CORE,
-            hint="Implement __pow__ using power rule: d(x^n)/dx = n*x^(n-1)",
+            hint="the power rule, with the exponent held constant",
         ),
         Check(
             "Backward computes correct gradient for power",
@@ -363,7 +363,7 @@ SUITE = CheckSuite(
             "Backward gradients match finite differences",
             backward_gradients_match_finite_differences,
             STRETCH,
-            hint="Numerical gradient is (f(x+eps) - f(x-eps)) / (2*eps)",
+            hint="nudge the input by a tiny amount and see how far the output moved",
         ),
         Check(
             "Reverse subtraction works",

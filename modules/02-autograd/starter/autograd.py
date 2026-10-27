@@ -52,11 +52,17 @@ class Value:
               - _children: tuple containing both self and other
               - _op: the string 'add'
 
-        TODO: Define a local function `_backward()` that applies the chain rule
-              for addition. For c = a + b:
-              - dc/da = 1, so: a.grad += gradient_flowing_back * 1.0
-              - dc/db = 1, so: b.grad += gradient_flowing_back * 1.0
-              where gradient_flowing_back is out.grad (the gradient of the output)
+        TODO: Define a local function `_backward()`. It runs later, during
+              backward(), and its job is to take the output's gradient
+              (`out.grad`) and push it on to each child.
+
+              Work out d(a+b)/da and d(a+b)/db yourself. They are the easiest
+              two derivatives in this file, and deriving them rather than
+              copying them is the whole point of the module.
+
+              Accumulate with `+=`, never assign with `=`. A value used twice
+              in one expression earns a gradient along each path, and `=`
+              throws the first one away.
 
         TODO: Attach _backward to the output so it will be called during backward().
 
@@ -79,11 +85,12 @@ class Value:
               - _children: tuple containing both self and other
               - _op: the string 'mul'
 
-        TODO: Define _backward() using the chain rule for multiplication.
-              For c = a * b:
-              - dc/da = b, so: a.grad += out.grad * b.data
-              - dc/db = a, so: b.grad += out.grad * a.data
-              (The gradient gets multiplied by the "local derivative")
+        TODO: Define _backward() for multiplication. Same shape as add, but
+              the local derivatives are not 1 any more: differentiate a * b
+              with respect to a, then with respect to b.
+
+              If you get stuck, the Karpathy video in Read first derives this
+              one on screen.
 
         TODO: Attach _backward to output and return it.
         """
@@ -124,10 +131,11 @@ class Value:
               - _children: tuple containing just self
               - _op: the string f'**{other}' (e.g., '**2')
 
-        TODO: Define _backward() using the power rule.
-              For c = a ** n:
-              - dc/da = n * (a ** (n-1))
-              So: self.grad += out.grad * (n * (self.data ** (n-1)))
+        TODO: Define _backward(). The exponent is held constant, which is what
+              makes this the power rule from school calculus: differentiate
+              a ** n with respect to a.
+
+              Only one child here, so only one gradient to push back.
 
         TODO: Attach _backward and return output.
         """

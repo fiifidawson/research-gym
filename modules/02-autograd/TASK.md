@@ -37,9 +37,9 @@ Copy `starter/autograd.py` into your folder and work through the TODOs. Keep the
 
 1. **`Value.__init__`** - Store data, children, operation, and initialize gradient to 0. Also initialize `_backward` to a no-op lambda.
 
-2. **`__add__` and `__radd__`** - Create a new Value for a + b. Store both values as children and 'add' as the operation. Define `_backward()` to apply the chain rule for addition (both gradients get the full upstream gradient).
+2. **`__add__` and `__radd__`** - Create a new Value for a + b. Store both values as children and 'add' as the operation. Define `_backward()` to apply the chain rule for addition. Differentiate `a + b` with respect to each of them first - they are the easiest two derivatives in this file.
 
-3. **`__mul__` and `__rmul__`** - Same pattern as add, but the local derivatives are different. For c = a * b, the gradient flowing to a is multiplied by b, and vice versa.
+3. **`__mul__` and `__rmul__`** - Same shape as add, but the local derivatives are no longer 1. Differentiate `a * b` with respect to `a`, then with respect to `b`.
 
 4. **`__neg__`** - Negate a value. Implement as multiplication by -1.
 
@@ -48,7 +48,7 @@ Copy `starter/autograd.py` into your folder and work through the TODOs. Keep the
 
 6. **`__truediv__`** - Division. Implement as a * (b ** -1).
 
-7. **`__pow__`** - Power (exponent must be a constant number, not a Value). Use the power rule: d(a^n)/da = n * a^(n-1).
+7. **`__pow__`** - Power (exponent must be a constant number, not a Value). The exponent being constant is what makes this the power rule from school calculus - differentiate `a ** n` with respect to `a`.
 
 8. **`__repr__`** - String representation showing data and gradient.
 
