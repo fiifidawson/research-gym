@@ -88,6 +88,33 @@
       "why": "150 lines. Read it after you have written your own, not before."
     },
     {
+      "module": "02-autograd",
+      "title": "The chain rule",
+      "url": "https://en.wikipedia.org/wiki/Chain_rule",
+      "source": "Wikipedia",
+      "kind": "reference",
+      "minutes": 10,
+      "why": "The one piece of calculus the module rests on. Skim it if it has been a while."
+    },
+    {
+      "module": "02-autograd",
+      "title": "Emulating numeric types",
+      "url": "https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types",
+      "source": "Python docs",
+      "kind": "reference",
+      "minutes": 15,
+      "why": "Which method Python calls for which operator, and when it falls back to the reverse one. Settles every __radd__ question before you ask it."
+    },
+    {
+      "module": "02-autograd",
+      "title": "How the backpropagation algorithm works",
+      "url": "http://neuralnetworksanddeeplearning.com/chap2.html",
+      "source": "Michael Nielsen",
+      "kind": "article",
+      "minutes": 45,
+      "why": "Chapter 2, for when you want the maths written out rather than coded."
+    },
+    {
       "module": "03-training-loop",
       "title": "Why momentum really works",
       "url": "https://distill.pub/2017/momentum/",

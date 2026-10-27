@@ -67,7 +67,7 @@
       "id": "02-autograd",
       "title": "Autograd from scratch",
       "phase": "fundamentals",
-      "status": "planned",
+      "status": "ready",
       "browser": true,
       "entrypoint": "autograd.py",
       "summary": "A scalar Value type and a backward() that walks the graph it built.",
