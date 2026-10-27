@@ -21,7 +21,12 @@ class Value:
     This lets backward() walk backward through the graph and apply the chain rule.
     """
 
-    def __init__(self, data, _children=(), _op=""):
+    def __init__(
+        self,
+        data: float,
+        _children: tuple[Value, ...] = (),
+        _op: str = "",
+    ) -> None:
         """Initialize a Value.
 
         Args:
@@ -37,7 +42,7 @@ class Value:
         """
         raise NotImplementedError
 
-    def __add__(self, other):
+    def __add__(self, other: Value | float) -> Value:
         """Addition: a + b creates a new Value that remembers 'a' and 'b' and 'add'.
 
         TODO: Convert `other` to a Value if it's a number (int or float).
@@ -59,12 +64,12 @@ class Value:
         """
         raise NotImplementedError
 
-    def __radd__(self, other):
+    def __radd__(self, other: Value | float) -> Value:
         """Reverse add: lets 5 + Value(3) work (calls Value(3).__radd__(5))."""
         # TODO: Use __add__ to handle it (addition is commutative)
         raise NotImplementedError
 
-    def __mul__(self, other):
+    def __mul__(self, other: Value | float) -> Value:
         """Multiplication: a * b creates a new Value that remembers the operation.
 
         TODO: Convert `other` to a Value if it's a number.
@@ -84,32 +89,32 @@ class Value:
         """
         raise NotImplementedError
 
-    def __rmul__(self, other):
+    def __rmul__(self, other: Value | float) -> Value:
         """Reverse multiply: lets 5 * Value(3) work."""
         # TODO: Use __mul__ (multiplication is commutative)
         raise NotImplementedError
 
-    def __neg__(self):
+    def __neg__(self) -> Value:
         """Negation: -a is implemented as a * -1."""
         # TODO: Use multiplication by -1
         raise NotImplementedError
 
-    def __sub__(self, other):
+    def __sub__(self, other: Value | float) -> Value:
         """Subtraction: a - b is a + (-b)."""
         # TODO: Implement using addition and negation
         raise NotImplementedError
 
-    def __rsub__(self, other):
+    def __rsub__(self, other: Value | float) -> Value:
         """Reverse subtraction: lets 5 - Value(3) work."""
-        # TODO: Use subtraction
+        # TODO (stretch): Use subtraction
         raise NotImplementedError
 
-    def __truediv__(self, other):
+    def __truediv__(self, other: Value | float) -> Value:
         """Division: a / b is a * (b ** -1)."""
         # TODO: Implement using multiplication and power
         raise NotImplementedError
 
-    def __pow__(self, other):
+    def __pow__(self, other: float) -> Value:
         """Power: a ** n where n is a number.
 
         TODO: Assert that `other` is int or float (exponent must be constant).
@@ -134,7 +139,7 @@ class Value:
         # "Value(data=5.0, grad=1.0)"
         raise NotImplementedError
 
-    def backward(self):
+    def backward(self) -> None:
         """Backward pass: walk the computation graph and apply the chain rule.
 
         This is the core of automatic differentiation. The idea:

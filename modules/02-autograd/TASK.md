@@ -20,10 +20,16 @@ Understanding backpropagation deeply is how you debug training, design new archi
 
 ## Read first
 
-- [The chain rule](https://en.wikipedia.org/wiki/Chain_rule) (math, 10 min)
-- [Python special methods](https://docs.python.org/3/reference/datamodel.html#special-method-names) (look at __add__, __mul__, __radd__, __rmul__)
-- [Operator overloading in Python](https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types)
-- Optional: [A tutorial on backpropagation](http://neuralnetworksanddeeplearning.com/chap2.html) (chapter 2)
+- [The spelled-out intro to neural networks and backpropagation](https://www.youtube.com/watch?v=VMj-3S1tku0) -
+  this module is that video, done yourself. Watch it once before you start.
+- [The chain rule](https://en.wikipedia.org/wiki/Chain_rule) - the one piece of calculus this
+  module is built on.
+- [Python data model](https://docs.python.org/3/reference/datamodel.html#special-method-names) -
+  `__add__`, `__mul__`, `__radd__`, `__rmul__`.
+- [Emulating numeric types](https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types) -
+  which method Python calls for which operator, and when it falls back to the reverse one.
+- [How the backpropagation algorithm works](http://neuralnetworksanddeeplearning.com/chap2.html) -
+  chapter 2, for the version with the maths written out.
 
 ## Core
 
@@ -37,7 +43,8 @@ Copy `starter/autograd.py` into your folder and work through the TODOs. Keep the
 
 4. **`__neg__`** - Negate a value. Implement as multiplication by -1.
 
-5. **`__sub__` and `__rsub__`** - Subtraction. Implement as a + (-b).
+5. **`__sub__`** - Subtraction. Implement as a + (-b). `__rsub__`, which is what makes
+   `5 - Value(3)` work, is a stretch item.
 
 6. **`__truediv__`** - Division. Implement as a * (b ** -1).
 
@@ -53,22 +60,23 @@ The key insight: each operation stores a `_backward` function that knows how to 
 
 Optional, doesn't block a merge.
 
-- Test your gradients against finite differences (numerical gradient checking)
-- Add support for more operations (e.g., log, exp, sin)
-- Time your backward pass on a large graph and optimize
+- **`__rsub__`** - so `5 - Value(3)` works, not just `Value(5) - Value(3)`.
+- Check your gradients against finite differences. Nudge a value by a tiny amount, see how much
+  the output moved, and compare that with the gradient you computed.
+- Hold up under a nested expression - something like `(a + b) * (a - b)`, where one value reaches
+  the output along more than one path.
+
+Not checked, but worth doing if you have the appetite: more operations (`exp`, `log`, `tanh`), and
+timing the backward pass on a large graph.
 
 ## Checking it
 
-Open the pull request. The check comment shows every item above, passed or failed. Push again and the comment updates.
+Open the pull request. The check comments with every item above, passed or failed. Push again and
+the comment updates. 18 core checks; when they're all green, ask for a review.
 
-For instant feedback, you can also run checks locally:
+For instant feedback, the Playground page on the site runs the same `checks.py` in your browser.
 
-```bash
-cd /Users/mac/Code/projects/research-gym-program/research-gym
-SUBMISSION_DIR=submissions/<your-handle>/02-autograd pytest modules/02-autograd/tests -v
-```
-
-**Done:** 18/18 core checks pass, one approval, merged.
+**Done:** 18/18 core, one approval, merged.
 
 ## Next
 

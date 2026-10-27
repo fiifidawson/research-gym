@@ -246,7 +246,10 @@ def value_supports_complex_nested_expressions(m):
     assert_close(result.data, 16.0, "(a+b)*(a-b) where a=5, b=3")
 
     result.backward()
-    assert isinstance(a.grad, float), "gradients should be computed"
+    # (a+b)*(a-b) is a**2 - b**2, so da is 2a and db is -2b. Both values reach the
+    # output along two paths, which is the only thing this check is really about.
+    assert_close(a.grad, 10.0, "da for (a+b)*(a-b) at a=5, b=3")
+    assert_close(b.grad, -6.0, "db for (a+b)*(a-b) at a=5, b=3")
 
 
 SUITE = CheckSuite(
