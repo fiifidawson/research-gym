@@ -49,7 +49,7 @@ updates. Push as often as you like.
 |---|---|
 | One module per pull request | Easier to review, and you get better feedback. |
 | Only touch `submissions/<your-handle>/` | Nobody can break anybody else's work. |
-| Don't edit `checks.py` or `tests/` | They're the shared definition of done. |
+| Don't edit `checks.py` or `tests/` | They're the shared definition of done. Adding them for a module that has none is [writing a module](#writing-a-module), which is welcome. |
 | Don't mix module work with repo changes | Two purposes, two pull requests. |
 
 The check enforces all four and says which one you tripped.

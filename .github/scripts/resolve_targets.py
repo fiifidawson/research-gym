@@ -24,16 +24,34 @@ SUBMISSION_RE = re.compile(r"^submissions/(?P<handle>[^/]+)/(?P<module>[^/]+)/.+
 OWNED_RE = re.compile(r"^submissions/(?P<handle>[^/]+)/.+")
 PROTECTED_RE = re.compile(r"^modules/[^/]+/(tests/.+|checks\.py)$")
 
+# Git's status letter for a path that did not exist on the base branch. Adding a
+# module's checks is authoring; editing checks that already exist is not. We read
+# this from git rather than from disk because CI checks out the pull request's
+# merged tree, where a brand-new checks.py is already present.
+ADDED = "A"
 
-def changed_files(base: str, head: str) -> list[str]:
+
+def changed_files(base: str, head: str) -> list[tuple[str, str]]:
+    """Every path the branch touches, paired with git's status letter for it."""
     diff = subprocess.run(
-        ["git", "diff", "--name-only", f"{base}...{head}"],
+        # --find-renames explicitly, so the runner's git config cannot decide
+        # whether a rename shows up as R or as a delete plus an add.
+        ["git", "diff", "--name-status", "--find-renames", f"{base}...{head}"],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
         check=True,
     )
-    return [line.strip() for line in diff.stdout.splitlines() if line.strip()]
+    changes = []
+    for line in diff.stdout.splitlines():
+        if not line.strip():
+            continue
+        fields = line.split("\t")
+        # A rename is "R100\told\tnew", everything else "X\tpath". Taking the last
+        # field records the path as it exists on the branch, which is what every
+        # rule below wants. The score on R100 is not part of the status letter.
+        changes.append((fields[0][0], fields[-1].strip()))
+    return changes
 
 
 def module_exists(module: str) -> bool:
@@ -44,11 +62,23 @@ def known_modules() -> list[str]:
     return sorted(p.parent.name for p in (REPO_ROOT / "modules").glob("*/checks.py"))
 
 
-def resolve(paths: list[str], author: str) -> dict:
+def resolve(paths: list[str], author: str, added: set[str] | None = None) -> dict:
+    """Work out what this pull request submits.
+
+    ``added`` holds the paths git reported as new on this branch. A brand-new
+    module's ``checks.py`` is authoring, not editing, so it is exempt from the
+    protected-paths rule below; an edit to one that already exists is not. The
+    default is the empty set, so a caller that forgets to pass it gets the
+    stricter behaviour rather than the looser one.
+    """
+    added = added or set()
+
     def fail(message: str) -> dict:
         return {"ok": False, "error": message, "targets": []}
 
-    protected = [p for p in paths if PROTECTED_RE.match(p)]
+    # A rename or a copy onto a protected path is an edit wearing a hat, and git
+    # reports it as R or C rather than A, so it does not reach this exemption.
+    protected = [p for p in paths if PROTECTED_RE.match(p) and p not in added]
     if protected:
         listed = "\n".join(f"  - {p}" for p in protected)
         return fail(
@@ -57,7 +87,10 @@ def resolve(paths: list[str], author: str) -> dict:
             "Those files are the shared definition of 'done', so changing them here would "
             "only move the goalposts. If you think a check is wrong - and sometimes it is - "
             "open an issue with the 'bug' template and say why. Fixing a bad check is a real "
-            "contribution, it just belongs in its own pull request."
+            "contribution, it just belongs in its own pull request.\n\n"
+            "Adding a brand-new module's checks is a different thing, and that is allowed. "
+            "If that is what you are doing, git has recorded one of these as a change to a "
+            "file that already exists - most often a rename. Commit it as a new file instead."
         )
 
     targets: dict[tuple[str, str], str] = {}
@@ -128,7 +161,12 @@ def main() -> int:
     parser.add_argument("--out", default="targets.json", type=Path)
     args = parser.parse_args()
 
-    result = resolve(changed_files(args.base, args.head), args.author)
+    changes = changed_files(args.base, args.head)
+    result = resolve(
+        [path for _, path in changes],
+        args.author,
+        added={path for status, path in changes if status == ADDED},
+    )
     args.out.write_text(json.dumps(result, indent=2), encoding="utf-8")
 
     if result["error"]:
