@@ -26,11 +26,11 @@ class Layer(ABC):
         """Run this layer on a batch of inputs, shape (batch, features)."""
         ...
 
-    def __call__(self, x):
+    def __call__(self, x: np.ndarray) -> np.ndarray:
         """Invoke the forward pass."""
         return self.forward(x)
 
-    def parameters(self):
+    def parameters(self) -> list[np.ndarray]:
         """Return trainable parameters."""
         return []
 
@@ -45,8 +45,7 @@ class Layer(ABC):
 
 
 class Linear(Layer):
-    """
-    The affine map `x @ W + b`.
+    """The affine map `x @ W + b`.
 
     Args:
         in_features: Size of each input row.
@@ -126,12 +125,15 @@ class Sequential(Layer):
         return [param for layer in self.layers for param in layer.parameters()]
 
     def __len__(self) -> int:
+        """Return the number of layers."""
         return len(self.layers)
 
     def __getitem__(self, index: int) -> Layer:
+        """Return the layer at the given index."""
         return self.layers[index]
 
     def __iter__(self):
+        """Iterate over the layers."""
         return iter(self.layers)  
 
     def __repr__(self) -> str:
@@ -183,7 +185,7 @@ class LayerNorm(Layer):
     `gamma * (x - mean) / sqrt(var + eps) + beta` over the last axis.
     """
 
-    def __init__(self, dim, eps: float = 1e-5) -> None:
+    def __init__(self, dim: int, eps: float = 1e-5) -> None:
         """Initialize the module."""
         super().__init__()
         self.gamma = np.ones(dim)
