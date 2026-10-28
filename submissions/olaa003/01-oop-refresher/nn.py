@@ -8,7 +8,9 @@ up by name, and module 02 imports this file.
 """
 
 from __future__ import annotations
+
 from abc import ABC, abstractmethod
+
 import numpy as np
 
 # =============================================================================
@@ -25,12 +27,15 @@ class Layer(ABC):
         ...
 
     def __call__(self, x):
+        """Invoke the forward pass."""
         return self.forward(x)
 
     def parameters(self):
+        """Return trainable parameters."""
         return []
 
     def __repr__(self):
+        """Return a string representation."""
         return f"{self.__class__.__name__} + ()"
 
 
@@ -51,6 +56,7 @@ class Linear(Layer):
     """
 
     def __init__(self, in_features: int, out_features: int, *, seed: int | None = None) -> None:
+        """Initialize the module."""
         super().__init__()
         self.in_features = in_features
         self.out_features = out_features
@@ -60,13 +66,16 @@ class Linear(Layer):
 
 
     def forward(self, x: np.ndarray) -> np.ndarray:
+        """Compute the forward pass."""
         return x @ self.W + self.b
         
 
     def parameters(self) -> list[np.ndarray]:
+        """Return trainable parameters."""
         return [self.W, self.b]
 
     def __repr__(self) -> str:
+        """Return a string representation."""
         return f"Linear(in_features={self.in_features}, out_features={self.out_features})"
 
 
@@ -79,9 +88,11 @@ class ReLU(Layer):
     """Zero out negatives, keep everything else."""
 
     def forward(self, x: np.ndarray) -> np.ndarray:
+        """Compute the forward pass."""
         return np.maximum(0, x)
  
     def __repr__(self) -> str:
+        """Return a string representation."""
         return "ReLU()"
     
 
@@ -98,17 +109,20 @@ class Sequential(Layer):
     """
 
     def __init__(self, *layers: Layer) -> None:
+        """Initialize the module."""
         super().__init__()
         for i, layer in enumerate(layers):
             setattr(self, f"layer_{i}", layer)
         self.layers = list(layers)
 
     def forward(self, x: np.ndarray) -> np.ndarray:
+        """Compute the forward pass."""
         for layer in self.layers:
             x = layer.forward(x)
         return x
 
     def parameters(self) -> list[np.ndarray]:
+        """Return trainable parameters."""
         return [param for layer in self.layers for param in layer.parameters()]
 
     def __len__(self) -> int:
@@ -121,6 +135,7 @@ class Sequential(Layer):
         return iter(self.layers)  
 
     def __repr__(self) -> str:
+        """Return a string representation."""
         layers_repr = ", ".join(repr(layer) for layer in self.layers)
         return f"Sequential({layers_repr})"
 
@@ -144,12 +159,15 @@ def num_parameters(layer: Layer) -> int:
 class Tanh(Layer):
     """TODO (stretch): np.tanh, as a Layer."""
     def forward(self, x: np.ndarray) -> np.ndarray:
+        """Compute the forward pass."""
         return np.tanh(x)
 
     def parameters(self) -> list[np.ndarray]:
+        """Return trainable parameters."""
             return []
 
     def __repr__(self) -> str:
+        """Return a string representation."""
         return "Tanh()"
     
 
@@ -166,17 +184,20 @@ class LayerNorm(Layer):
     """
 
     def __init__(self, dim, eps: float = 1e-5) -> None:
+        """Initialize the module."""
         super().__init__()
         self.gamma = np.ones(dim)
         self.beta = np.zeros(dim)
         self.eps = eps
 
     def forward(self, x: np.ndarray) -> np.ndarray:
+        """Compute the forward pass."""
         mean = x.mean(axis=-1, keepdims=True)
         var = x.var(axis=-1, keepdims=True)
         return self.gamma * (x - mean) / np.sqrt(var + self.eps) + self.beta
 
     def parameters(self) -> list[np.ndarray]:
+        """Return trainable parameters."""
         return [self.gamma, self.beta]
 
 
