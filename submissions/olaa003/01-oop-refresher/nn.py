@@ -59,15 +59,16 @@ class Linear(Layer):
         super().__init__()
         self.in_features = in_features
         self.out_features = out_features
-        self.W = np.random.default_rng(seed).normal(loc=0.0,
-    scale=np.sqrt(2 / self.in_features), size=(self.in_features, self.out_features),)
+        self.W = np.random.default_rng(seed).normal(
+            loc=0.0,
+            scale=np.sqrt(2 / self.in_features),
+            size=(self.in_features, self.out_features),
+        )
         self.b = np.zeros(self.out_features)
-
 
     def forward(self, x: np.ndarray) -> np.ndarray:
         """Compute the forward pass."""
         return x @ self.W + self.b
-        
 
     def parameters(self) -> list[np.ndarray]:
         """Return trainable parameters."""
@@ -89,11 +90,11 @@ class ReLU(Layer):
     def forward(self, x: np.ndarray) -> np.ndarray:
         """Compute the forward pass."""
         return np.maximum(0, x)
- 
+
     def __repr__(self) -> str:
         """Return a string representation."""
         return "ReLU()"
-    
+
 
 # =============================================================================
 # 4. A layer made of layers
@@ -102,7 +103,7 @@ class ReLU(Layer):
 
 class Sequential(Layer):
     """Runs the layers it holds, front to back.
-    
+
     A Sequential is a Layer and contains Layers. That is how every framework
     composes a model, and how you'll assemble a transformer block in module 08.
     """
@@ -134,7 +135,7 @@ class Sequential(Layer):
 
     def __iter__(self):
         """Iterate over the layers."""
-        return iter(self.layers)  
+        return iter(self.layers)
 
     def __repr__(self) -> str:
         """Return a string representation."""
@@ -152,7 +153,6 @@ def num_parameters(layer: Layer) -> int:
     return sum(param.size for param in layer.parameters())
 
 
-
 # =============================================================================
 # 6. Stretch - optional
 # =============================================================================
@@ -160,6 +160,7 @@ def num_parameters(layer: Layer) -> int:
 
 class Tanh(Layer):
     """TODO (stretch): np.tanh, as a Layer."""
+
     def forward(self, x: np.ndarray) -> np.ndarray:
         """Compute the forward pass."""
         return np.tanh(x)
@@ -171,7 +172,7 @@ class Tanh(Layer):
     def __repr__(self) -> str:
         """Return a string representation."""
         return "Tanh()"
-    
+
 
 class LayerNorm(Layer):
     """normalise each row to zero mean and unit variance.
