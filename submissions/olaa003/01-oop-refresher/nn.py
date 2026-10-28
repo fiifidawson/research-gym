@@ -164,7 +164,7 @@ class Tanh(Layer):
 
     def parameters(self) -> list[np.ndarray]:
         """Return trainable parameters."""
-            return []
+        return []
 
     def __repr__(self) -> str:
         """Return a string representation."""
