@@ -79,9 +79,7 @@ class Linear(Layer):
         self.in_features = in_features
         self.out_features = out_features
         self.W = np.random.default_rng(seed).normal(
-            loc=0,
-            scale=np.sqrt(2 / self.in_features),
-            size=(in_features, out_features)
+            loc=0, scale=np.sqrt(2 / self.in_features), size=(in_features, out_features)
         )
         self.b = np.zeros(out_features)
 
@@ -145,6 +143,10 @@ class Sequential(Layer):
         # TODO: model[0]
         return self.layers[index]
 
+    def __iter__(self) -> Iterator[Layer]:
+        # TODO (stretch): `for layer in model:`
+        yield from self.layers
+
     def __repr__(self) -> str:
         # TODO: exactly
         # `Sequential(Linear(in_features=2, out_features=4), ReLU(), Linear(in_features=4, out_features=1))`
@@ -173,8 +175,10 @@ def num_parameters(layer: Layer) -> int:
 
 class Tanh(Layer):
     """TODO (stretch): np.tanh, as a Layer."""
+
     def forward(self, x: np.ndarray) -> np.ndarray:
         return np.tanh(x)
+
 
 class LayerNorm(Layer):
     """TODO (stretch): normalise each row to zero mean and unit variance.
@@ -187,7 +191,8 @@ class LayerNorm(Layer):
     return both from `parameters()`, and compute
     `gamma * (x - mean) / sqrt(var + eps) + beta` over the last axis.
     """
-    def __init__(self, dim: int, eps: float | None = 1e-5) -> None:
+
+    def __init__(self, dim: int, eps: float = 1e-5) -> None:
         self.dim = dim
         self.eps = eps
         self.gamma = np.ones(dim)
@@ -201,14 +206,13 @@ class LayerNorm(Layer):
 
     def forward(self, x: np.ndarray) -> np.ndarray:
         """Run this layer on a batch of inputs, shape (batch, features)."""
-        return self.gamma * (x - x.mean(axis=-1, keepdims=True)) / np.sqrt(x.var(axis=-1, keepdims=True) + self.eps) + self.beta
+        return (
+            self.gamma
+            * (x - x.mean(axis=-1, keepdims=True))
+            / np.sqrt(x.var(axis=-1, keepdims=True) + self.eps)
+            + self.beta
+        )
 
-
-# TODO (stretch): give Sequential an `__iter__` so `for layer in model:` works.
-def __iter__(self) -> Iterator[Layer]:
-    yield from  self.layers
-
-Sequential.__iter__ = __iter__
 
 if __name__ == "__main__":
     # Scratch space. Nothing here is checked.
