@@ -81,7 +81,7 @@
       "id": "03-training-loop",
       "title": "The training loop",
       "phase": "fundamentals",
-      "status": "planned",
+      "status": "ready",
       "browser": true,
       "entrypoint": "train.py",
       "summary": "Dataset, DataLoader, SGD and Trainer. Fit an MLP to two moons.",
